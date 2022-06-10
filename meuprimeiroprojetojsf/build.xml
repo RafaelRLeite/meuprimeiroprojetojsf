@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="meuprimeiroprojetojsf">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../../eclipse-jee-2021/eclipse/"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="Maven Dependencies.libraryclasspath">
+        <pathelement location="../../../../Users/User/.m2/repository/com/oracle/substratevm/svm/19.2.1/svm-19.2.1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/graalvm/sdk/graal-sdk/19.2.1/graal-sdk-19.2.1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/com/oracle/substratevm/objectfile/19.2.1/objectfile-19.2.1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/com/oracle/substratevm/pointsto/19.2.1/pointsto-19.2.1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/graalvm/truffle/truffle-nfi/19.2.1/truffle-nfi-19.2.1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/graalvm/truffle/truffle-api/19.2.1/truffle-api-19.2.1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/graalvm/compiler/compiler/19.2.1/compiler-19.2.1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/boot/spring-boot-starter-test/2.2.2.RELEASE/spring-boot-starter-test-2.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/boot/spring-boot-starter/2.2.2.RELEASE/spring-boot-starter-2.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/boot/spring-boot/2.2.2.RELEASE/spring-boot-2.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/spring-context/5.2.2.RELEASE/spring-context-5.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/spring-aop/5.2.2.RELEASE/spring-aop-5.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/spring-beans/5.2.2.RELEASE/spring-beans-5.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/spring-expression/5.2.2.RELEASE/spring-expression-5.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.2.2.RELEASE/spring-boot-autoconfigure-2.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/boot/spring-boot-starter-logging/2.2.2.RELEASE/spring-boot-starter-logging-2.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.12.1/log4j-to-slf4j-2.12.1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/apache/logging/log4j/log4j-api/2.12.1/log4j-api-2.12.1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/slf4j/jul-to-slf4j/1.7.29/jul-to-slf4j-1.7.29.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/yaml/snakeyaml/1.25/snakeyaml-1.25.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/boot/spring-boot-test/2.2.2.RELEASE/spring-boot-test-2.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/2.2.2.RELEASE/spring-boot-test-autoconfigure-2.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/com/jayway/jsonpath/json-path/2.4.0/json-path-2.4.0.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/net/minidev/json-smart/2.3/json-smart-2.3.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/slf4j/slf4j-api/1.7.29/slf4j-api-1.7.29.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/junit/jupiter/junit-jupiter/5.5.2/junit-jupiter-5.5.2.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.5.2/junit-jupiter-api-5.5.2.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/junit/platform/junit-platform-commons/1.5.2/junit-platform-commons-1.5.2.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.5.2/junit-jupiter-params-5.5.2.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.5.2/junit-jupiter-engine-5.5.2.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/junit/platform/junit-platform-engine/1.5.2/junit-platform-engine-1.5.2.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/mockito/mockito-junit-jupiter/3.1.0/mockito-junit-jupiter-3.1.0.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/assertj/assertj-core/3.13.2/assertj-core-3.13.2.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/hamcrest/hamcrest/2.1/hamcrest-2.1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/mockito/mockito-core/3.1.0/mockito-core-3.1.0.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/net/bytebuddy/byte-buddy/1.10.4/byte-buddy-1.10.4.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/net/bytebuddy/byte-buddy-agent/1.10.4/byte-buddy-agent-1.10.4.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/objenesis/objenesis/2.6/objenesis-2.6.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/skyscreamer/jsonassert/1.5.0/jsonassert-1.5.0.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/spring-core/5.2.2.RELEASE/spring-core-5.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/spring-jcl/5.2.2.RELEASE/spring-jcl-5.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/springframework/spring-test/5.2.2.RELEASE/spring-test-5.2.2.RELEASE.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/xmlunit/xmlunit-core/2.6.3/xmlunit-core-2.6.3.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/com/sun/faces/jsf-api/2.2.20/jsf-api-2.2.20.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/com/sun/faces/jsf-impl/2.2.20/jsf-impl-2.2.20.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/jstl/jstl/1.2/jstl-1.2.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/hibernate/hibernate-entitymanager/4.3.8.Final/hibernate-entitymanager-4.3.8.Final.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/jboss/logging/jboss-logging/3.4.1.Final/jboss-logging-3.4.1.Final.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/jboss/logging/jboss-logging-annotations/1.2.0.Beta1/jboss-logging-annotations-1.2.0.Beta1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/hibernate/common/hibernate-commons-annotations/4.0.5.Final/hibernate-commons-annotations-4.0.5.Final.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/jboss/spec/javax/transaction/jboss-transaction-api_1.2_spec/1.0.0.Final/jboss-transaction-api_1.2_spec-1.0.0.Final.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/hibernate/hibernate-core/4.3.8.Final/hibernate-core-4.3.8.Final.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/jboss/jandex/1.1.0.Final/jandex-1.1.0.Final.jar"/>
+        <pathelement location="../../../../Users/User/.m2/repository/org/postgresql/postgresql/9.2-1003-jdbc4/postgresql-9.2-1003-jdbc4.jar"/>
+    </path>
+    <path id="Web App Libraries.libraryclasspath"/>
+    <path id="EAR Libraries.libraryclasspath"/>
+    <path id="Server Runtime [Tomcat 9.0].libraryclasspath">
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/annotations-api.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/catalina-ant.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/catalina-ha.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/catalina-storeconfig.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/catalina-tribes.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/catalina.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/ecj-4.7.3a.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/el-api.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/jasper-el.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/jasper.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/jaspic-api.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/jsp-api.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/servlet-api.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/tomcat-api.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/tomcat-coyote.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/tomcat-dbcp.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/tomcat-i18n-es.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/tomcat-i18n-fr.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/tomcat-i18n-ja.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/tomcat-jdbc.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/tomcat-jni.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/tomcat-util-scan.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/tomcat-util.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/tomcat-websocket.jar"/>
+        <pathelement location="../../../apache-tomcat-9.0.10/lib/websocket-api.jar"/>
+    </path>
+    <path id="meuprimeiroprojetojsf.classpath">
+        <pathelement location="target/classes"/>
+        <pathelement location="target/test-classes"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+        <path refid="Web App Libraries.libraryclasspath"/>
+        <path refid="EAR Libraries.libraryclasspath"/>
+        <path refid="Server Runtime [Tomcat 9.0].libraryclasspath"/>
+    </path>
+    <path id="run.TesteJPA (1).classpath">
+        <path refid="meuprimeiroprojetojsf.classpath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="target/classes"/>
+        <mkdir dir="target/test-classes"/>
+        <copy includeemptydirs="false" todir="target/classes">
+            <fileset dir="src/main/java">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="target/classes">
+            <fileset dir="src/main/resources">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+                <exclude name="**"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="target/test-classes">
+            <fileset dir="src/test/java">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="target/test-classes">
+            <fileset dir="src/test/resources">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+                <exclude name="**"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="target/classes"/>
+        <delete dir="target/test-classes"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="target/classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src/main/java"/>
+            <src path="src/main/resources"/>
+            <exclude name="**"/>
+            <classpath refid="meuprimeiroprojetojsf.classpath"/>
+        </javac>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="target/test-classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src/test/java"/>
+            <src path="src/test/resources"/>
+            <exclude name="**"/>
+            <classpath refid="meuprimeiroprojetojsf.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="TesteJPA (1)">
+        <java classname="br.com.cursojsf.TesteJPA" failonerror="true" fork="yes">
+            <classpath refid="run.TesteJPA (1).classpath"/>
+        </java>
+    </target>
+</project>
