@@ -21,17 +21,14 @@ public class Pessoa implements Serializable {
 	private String nome;
 	private String sobrenome;
 	private Integer idade;
-	
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
-	
 	private String sexo;
 	private String[] frameworks;
 	private Boolean ativo;
 	private String senha;
 	private String login;
-	
-	private String perfilUser; 
+	private String perfilUser;
 
 	public Pessoa() {
 	}

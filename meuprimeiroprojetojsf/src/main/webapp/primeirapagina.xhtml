@@ -15,11 +15,9 @@
 	<h:form id="formPessoa">
 
 		<h:panelGrid columns="2">
-
 			<f:facet name="header">
 				<h:outputText value="Cadastro de Usuario" />
 			</f:facet>
-
 			<h:outputLabel value="Id" />
 			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true" />
 
@@ -46,13 +44,11 @@
 			<h:outputLabel value="Frameworks:" />
 			<h:selectManyMenu id="campoFramework" style="height:100px"
 				value="#{pessoaBean.pessoa.frameworks}">
-
 				<f:selectItem itemValue="Hibernate" />
 				<f:selectItem itemValue="Spring MVC" />
 				<f:selectItem itemValue="PrimeFaces" />
 				<f:selectItem itemValue="JPA" />
 				<f:selectItem itemValue="JSF" />
-
 			</h:selectManyMenu>
 
 			<h:outputLabel value="Ativo" />
@@ -64,21 +60,17 @@
 			<h:outputLabel value="Senha:" />
 			<h:inputSecret value="#{pessoaBean.pessoa.senha}" />
 
-			<h:outputLabel value="Perfil: " />
+			<h:outputLabel value="Perfil" />
 			<h:selectOneMenu id="perfil" value="#{pessoaBean.pessoa.perfilUser}"
 				required="false">
-				
-				<f:selectItem itemValue="NÃO" itemLabel="[-Selecione-]"
-					noSelectionOption="false" />
+				<f:selectItem itemLabel="[-Selecione-]" noSelectionOption="false" />
 				<f:selectItem itemValue="ADMINISTRADOR" itemLabel="Administrador" />
-				<f:selectItem itemValue="SECRETARIA" itemLabel="Secretaria" />
-				<f:selectItem itemValue="RECEPCIONISTA" itemLabel="Recepcionista" />
-
+				<f:selectItem itemValue="SECRETARIO" itemLabel="Secretário" />
+				<f:selectItem itemValue="RECEPCIONISTA" itemLabel="	Recepcionista" />
 			</h:selectOneMenu>
 
 			<h:outputLabel />
 			<h:panelGroup>
-
 				<h:commandButton value="Salvar" action="#{pessoaBean.salvar()}"
 					image="/resources/img/Salvar.png" title="Salvar" />
 				<h:commandButton value="Novo" action="#{pessoaBean.novo()}"
@@ -87,7 +79,6 @@
 					image="/resources/img/Delete.png" title="Deletar" />
 				<h:commandButton value="Limpar" type="reset"
 					image="/resources/img/Limpar.png" title="Limpar" />
-
 			</h:panelGroup>
 
 			<br />
@@ -95,31 +86,25 @@
 
 		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="1"
 			cellpadding="6">
-
 			<f:facet name="header">
 				Lista de Usuários
 			</f:facet>
-
 			<h:column>
 				<f:facet name="header">ID</f:facet>
 				<h:outputText value="#{pessoa.id}" />
 			</h:column>
-
 			<h:column>
 				<f:facet name="header">Nome da pessoa</f:facet>
 				<h:outputText value="#{pessoa.nome}" />
 			</h:column>
-
 			<h:column>
 				<f:facet name="header">Sobrenome da pessoa</f:facet>
 				<h:outputText value="#{pessoa.sobrenome}" />
 			</h:column>
-
 			<h:column>
 				<f:facet name="header">Idade</f:facet>
 				<h:outputText value="#{pessoa.idade}" />
 			</h:column>
-
 			<h:column>
 				<f:facet name="header">Editar</f:facet>
 				<h:commandLink>
@@ -128,20 +113,15 @@
 					<h:graphicImage value="/resources/img/Editar.png" />
 				</h:commandLink>
 			</h:column>
-
 			<h:column>
-
 				<f:facet name="header">Excluir</f:facet>
 				<h:commandLink action="#{pessoaBean.remove()}">
 					<f:setPropertyActionListener value="#{pessoa}"
 						target="#{pessoaBean.pessoa}" />
 					<h:graphicImage value="/resources/img/Delete.png" />
 				</h:commandLink>
-
 			</h:column>
-
 		</h:dataTable>
-
 	</h:form>
 
 </h:body>

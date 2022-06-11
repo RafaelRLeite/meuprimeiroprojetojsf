@@ -12,10 +12,21 @@
 
 <h:body>
 
-	<h:form id="formlogin">
+	<h:form id="formlogin" style="margin-top:15%; margin-left:40%">
 
 		<h1>Realize o login</h1>
+
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Login: " />
+			<h:inputText value="#{pessoaBean.pessoa.login}" />
+
+			<h:outputLabel value="Senha: " />
+			<h:inputSecret value="#{pessoaBean.pessoa.senha}" />
 			
+			<h:commandButton action="#{pessoaBean.logar()}" value="Acessar" />
+			<h:commandButton type="reset" value="Limpar" />
+		</h:panelGrid>
+
 	</h:form>
 
 </h:body>
