@@ -12,7 +12,18 @@
 
 <h:body>
 
-	<h:form id="formPessoa">
+	<h:form>
+		<h:commandLink action="primeirapagina" value="Administração"
+			style="margin-left:1cm" />
+		<h:commandLink action="lancamento?faces-redirect=true"
+			value="Lançamentos" style="margin-left:1cm" />
+		<h:commandLink action="index?faces-redirect=true"
+			value="Trocar Usuário" style="margin-left:1cm" />
+
+	</h:form>
+
+	<h:form id="formPessoa" style="margin-top:3%; margin-left:2%">
+
 
 		<h:panelGrid columns="2">
 			<f:facet name="header">
@@ -73,19 +84,22 @@
 			<h:panelGroup>
 				<h:commandButton value="Salvar" action="#{pessoaBean.salvar()}"
 					image="/resources/img/Salvar.png" title="Salvar" />
-				<h:commandButton value="Novo" action="#{pessoaBean.novo()}"
+				<h:commandButton style="margin-left:0.5cm" value="Novo"
+					action="#{pessoaBean.novo()}"
 					image="/resources/img/NovoUsuario.png" title="Novo" />
-				<h:commandButton value="Delete" action="#{pessoaBean.remove()}"
-					image="/resources/img/Delete.png" title="Deletar" />
-				<h:commandButton value="Limpar" type="reset"
-					image="/resources/img/Limpar.png" title="Limpar" />
+				<h:commandButton style="margin-left:0.5cm" value="Delete"
+					action="#{pessoaBean.remove()}" image="/resources/img/Delete.png"
+					title="Deletar"
+					rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" />
+				<h:commandButton style="margin-left:0.5cm" value="Limpar"
+					type="reset" image="/resources/img/Limpar.png" title="Limpar" />
 			</h:panelGroup>
 
 			<br />
 		</h:panelGrid>
 
 		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="1"
-			cellpadding="6">
+			cellpadding="6" rendered="true">
 			<f:facet name="header">
 				Lista de Usuários
 			</f:facet>
@@ -113,7 +127,7 @@
 					<h:graphicImage value="/resources/img/Editar.png" />
 				</h:commandLink>
 			</h:column>
-			<h:column>
+			<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 				<f:facet name="header">Excluir</f:facet>
 				<h:commandLink action="#{pessoaBean.remove()}">
 					<f:setPropertyActionListener value="#{pessoa}"

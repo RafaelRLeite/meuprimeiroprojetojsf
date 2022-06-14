@@ -75,6 +75,19 @@ public class PessoaBean {
 		return "index.jsf";
 	}
 
+	public boolean permiteAcesso(String acesso) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+
+		HttpServletRequest req = (HttpServletRequest) externalContext.getRequest();
+		HttpSession session = req.getSession();
+
+		Pessoa pessoaUser = (Pessoa) session.getAttribute("usuarioLogado");
+
+		return pessoaUser.getPerfilUser().equals(acesso);
+
+	}
+
 	public List<Pessoa> getPessoas() {
 		return pessoas;
 	}
