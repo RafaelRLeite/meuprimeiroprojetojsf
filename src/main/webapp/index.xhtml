@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<html>
+
+<h:head>
+	<title>Login</title>
+</h:head>
+
+<h:body>
+
+	<h:form id="formlogin" style="margin-top:15%; margin-left:40%">
+
+		<h1>Realize o login</h1>
+
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Login: " />
+			<h:inputText value="#{pessoaBean.pessoa.login}" />
+
+			<h:outputLabel value="Senha: " />
+			<h:inputSecret value="#{pessoaBean.pessoa.senha}" />
+			
+			<h:commandButton action="#{pessoaBean.logar()}" value="Acessar" />
+			<h:commandButton type="reset" value="Limpar" />
+		</h:panelGrid>
+
+	</h:form>
+
+</h:body>
+
+	</html>
+
+</f:view>
