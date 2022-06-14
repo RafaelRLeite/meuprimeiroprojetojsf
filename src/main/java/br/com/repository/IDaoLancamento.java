@@ -6,6 +6,6 @@ import br.com.entidades.Lancamento;
 
 public interface IDaoLancamento {
 
-	List<Lancamento> consultarCodUser(Long codUser);
+	List<Lancamento> consultar(Long codUser);
 
 }

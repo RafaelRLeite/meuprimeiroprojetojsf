@@ -12,7 +12,7 @@ import br.com.jpautil.JPAUtil;
 public class IDaoLancamentoImpl implements IDaoLancamento {
 
 	@Override
-	public List<Lancamento> consultarCodUser(Long codUser) {
+	public List<Lancamento> consultar(Long codUser) {
 		List<Lancamento> lista = null;
 
 		EntityManager entityManager = JPAUtil.getEntityManager();
@@ -24,7 +24,6 @@ public class IDaoLancamentoImpl implements IDaoLancamento {
 		} catch (NoResultException e) {
 			return null;
 		} finally {
-			transaction.commit();
 			entityManager.close();
 		}
 

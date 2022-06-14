@@ -57,10 +57,11 @@
 					type="reset" image="/resources/img/Limpar.png" title="Limpar" />
 			</h:panelGroup>
 
+			<br />
 		</h:panelGrid>
 
 		<h:dataTable value="#{lancamentoBean.lancamentos}" var="lanc"
-			border="3" cellpadding="6">
+			border="3" cellpadding="6" rendered="true">
 			<f:facet name="header">Lista de Lançamentos</f:facet>
 
 			<h:column>
@@ -83,6 +84,29 @@
 				<h:outputLabel value="#{lanc.empresaDestino}" />
 			</h:column>
 
+			<h:column>
+				<f:facet name="header">Usuário</f:facet>
+				<h:outputLabel value="#{lanc.usuario.nome}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Editar</f:facet>
+				<h:commandLink title="Editar">
+					<f:setPropertyActionListener value="#{lanc}"
+						target="#{lancamentoBean.lancamento}" />
+					<h:graphicImage value="/resources/img/Editar.png" />
+				</h:commandLink>
+			</h:column>
+
+			<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+				<f:facet name="header">Deletar</f:facet>
+				<h:commandLink action="#{lancamentoBean.remove()}" title="Excluir">
+					<f:setPropertyActionListener value="#{lanc}"
+						target="#{lancamentoBean.lancamento}" />
+					<h:graphicImage value="resources/img/Delete.png" />
+				</h:commandLink>
+
+			</h:column>
 		</h:dataTable>
 
 	</h:form>

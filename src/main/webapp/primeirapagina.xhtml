@@ -51,6 +51,12 @@
 				<f:selectItem itemValue="FEMININO" itemLabel="Sexo Feminino" />
 
 			</h:selectOneMenu>
+			
+			<h:outputLabel value="Sexo2" />
+			<h:selectOneRadio id="compoSexo2" value="#{pessoaBean.pessoa.sexo2}"> 
+				<f:selectItem itemValue="M" itemLabel=" Sexo Masculino"/>
+				<f:selectItem itemValue="F" itemLabel=" Sexo Feminino"/>
+			</h:selectOneRadio>
 
 			<h:outputLabel value="Frameworks:" />
 			<h:selectManyMenu id="campoFramework" style="height:100px"
@@ -95,11 +101,10 @@
 					type="reset" image="/resources/img/Limpar.png" title="Limpar" />
 			</h:panelGroup>
 
-			<br />
+			<br /> 
 		</h:panelGrid>
 
-		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="1"
-			cellpadding="6" rendered="true">
+		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="1" cellpadding="6" rendered="true">
 			<f:facet name="header">
 				Lista de Usuários
 			</f:facet>
@@ -121,17 +126,15 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Editar</f:facet>
-				<h:commandLink>
-					<f:setPropertyActionListener value="#{pessoa}"
-						target="#{pessoaBean.pessoa}" />
+				<h:commandLink title="Editar">
+					<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}" />
 					<h:graphicImage value="/resources/img/Editar.png" />
 				</h:commandLink>
 			</h:column>
 			<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 				<f:facet name="header">Excluir</f:facet>
-				<h:commandLink action="#{pessoaBean.remove()}">
-					<f:setPropertyActionListener value="#{pessoa}"
-						target="#{pessoaBean.pessoa}" />
+				<h:commandLink action="#{pessoaBean.remove()}" title="Excluir">
+					<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}" />
 					<h:graphicImage value="/resources/img/Delete.png" />
 				</h:commandLink>
 			</h:column>
