@@ -34,14 +34,25 @@
 			</h:inputText>
 
 			<h:outputLabel value="Sobrenome" />
-			<h:inputText value="#{pessoaBean.pessoa.sobrenome}" />
+			<h:inputText value="#{pessoaBean.pessoa.sobrenome}" required="true"
+				requiredMessage="Informe o Sobrenome do usuário" />
 
 			<h:outputLabel value="Idade" />
-			<h:inputText value="#{pessoaBean.pessoa.idade}" />
+			<h:inputText value="#{pessoaBean.pessoa.idade}" required="true"
+				requiredMessage="Informe a Idade do usuário" />
+
+			<h:outputLabel value="CPF" />
+			<h:inputText value="#{pessoaBean.pessoa.CPF}" required="true"
+				requiredMessage="Informe o CPF do usuário" />
+
+			<h:outputLabel value="Titulo Eleitoral" />
+			<h:inputText value="#{pessoaBean.pessoa.tituloEleitoral}"
+				required="true"
+				requiredMessage="Informe o Titulo Eleitoral do usuário" />
 
 			<h:outputLabel value="Sexo" />
-			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}"
-				required="false">
+			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo }"
+				required="true" requiredMessage="Informe o Sexo do usuário">
 				<f:selectItem itemValue="NÃO" itemLabel="[-Selecione-]"
 					noSelectionOption="false" />
 				<f:selectItem itemValue="MASCULINO" itemLabel="Sexo Masculino" />
@@ -49,8 +60,10 @@
 			</h:selectOneMenu>
 
 			<h:outputLabel value="Nascimento: " />
-			<h:inputText value="#{pessoaBean.pessoa.dataNascimento}">
-				<f:convertDateTime pattern="dd/mm/yyyy" dateStyle="full"
+			<h:inputText value="#{pessoaBean.pessoa.dataNascimento}"
+				required="true"
+				requiredMessage="Informe a Data de Nascimento do usuário">
+				<f:convertDateTime pattern="dd/MM/yyyy" dateStyle="full"
 					locale="pt_BR" />
 			</h:inputText>
 
@@ -63,6 +76,28 @@
 				<f:selectItem itemValue="JPA" />
 				<f:selectItem itemValue="JSF" />
 			</h:selectManyMenu>
+
+			<h:outputLabel value="CEP" />
+			<h:inputText value="#{pessoaBean.pessoa.cep}">
+				<f:ajax event="blur" execute="@this"
+					listener="#{pessoaBean.pesquisaCep}" render="logradouro complemento bairro localidade UF" />
+			</h:inputText>
+
+			<h:outputLabel value="Logradouro" />
+			<h:inputText value="#{pessoaBean.pessoa.logradouro}" id="logradouro" />
+
+			<h:outputLabel value="Complemento" />
+			<h:inputText value="#{pessoaBean.pessoa.complemento}"
+				id="complemento" />
+
+			<h:outputLabel value="Bairro" />
+			<h:inputText value="#{pessoaBean.pessoa.bairro}" id="bairro" />
+
+			<h:outputLabel value="Localidade" />
+			<h:inputText value="#{pessoaBean.pessoa.localidade}" id="localidade" />
+
+			<h:outputLabel value="UF" />
+			<h:inputText value="#{pessoaBean.pessoa.uf}" id="UF" />
 
 			<h:outputLabel value="Ativo" />
 			<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}" />
@@ -104,22 +139,27 @@
 			<h:panelGroup>
 				<h:commandButton title="Salvar" value="Salvar"
 					action="#{pessoaBean.salvar()}" image="/resources/img/Salvar.png" />
-				<h:commandButton title="Novo" value="Novo"
+
+				<h:commandButton title="Novo" value="Novo" id="botaoNovo"
 					action="#{pessoaBean.novo()}" style="margin-left:0.5cm"
-					image="/resources/img/NovoUsuario.png" />
+					image="/resources/img/NovoUsuario.png">
+					<f:ajax execute="botaoNovo" render="@form" />
+				</h:commandButton>
 				<h:commandButton title="Deletar" value="Delete"
 					action="#{pessoaBean.remove()}" style="margin-left:0.5cm"
 					image="/resources/img/Delete.png"
 					rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" />
-				<h:commandButton title="Limpar" value="Limpar"
+				<h:commandButton title="Limpar" id="botaoLimpar" value="Limpar"
 					action="#{pessoaBean.limpar()}" style="margin-left:0.5cm"
-					image="/resources/img/Limpar.png" />
+					image="/resources/img/Limpar.png">
+					<f:ajax execute="botaoLimpar" render="@form" />
+				</h:commandButton>
 			</h:panelGroup>
 
 			<br />
 		</h:panelGrid>
 	</h:form>
-	
+
 	<h:form>
 		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="1"
 			cellpadding="6" rendered="true">
