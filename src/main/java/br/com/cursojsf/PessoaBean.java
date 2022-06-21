@@ -15,13 +15,17 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
 import br.com.dao.DaoGeneric;
+import br.com.entidades.Cidades;
+import br.com.entidades.Estados;
 import br.com.entidades.Pessoa;
+import br.com.jpautil.JPAUtil;
 import br.com.repository.IDaoPessoa;
 import br.com.repository.IDaoPessoaImpl;
 
@@ -33,6 +37,8 @@ public class PessoaBean {
 	private DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
 	private List<Pessoa> pessoas = new ArrayList<Pessoa>();
 	private IDaoPessoa iDaoPessoa = new IDaoPessoaImpl();
+	private List<SelectItem> estados;
+	private List<SelectItem> cidades;
 
 	public String salvar() {
 		pessoa = daoGeneric.Merge(pessoa);
@@ -110,7 +116,7 @@ public class PessoaBean {
 
 		return "index.jsf";
 	}
-	
+
 	public boolean permiteAcesso(String acesso) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = context.getExternalContext();
@@ -148,13 +154,44 @@ public class PessoaBean {
 			pessoa.setLocalidade(gsonAux.getLocalidade());
 			pessoa.setUf(gsonAux.getUf());
 
-			System.out.println(gsonAux);
+			// System.out.println(gsonAux);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			mostrarMsg("erro ao consultar cep");
 		}
 
+	}
+
+	public void carregarCidades(AjaxBehaviorEvent event) {
+
+		String codigoEstado = (String) event.getComponent().getAttributes().get("submittedValue");
+
+		if (codigoEstado != null) {
+			Estados estado = JPAUtil.getEntityManager().find(Estados.class, Long.parseLong(codigoEstado));
+
+			if (pessoa != null) {
+				pessoa.setEstados(estado);
+
+				List<Cidades> cidades = JPAUtil.getEntityManager().createQuery("from Cidades where estados.id = " + codigoEstado).getResultList();
+
+				List<SelectItem> selectItemsCidades = new ArrayList<SelectItem>();
+
+				for (Cidades cidade : cidades) {
+					selectItemsCidades.add(new SelectItem(cidade.getId(), cidade.getNome()));
+				}
+
+				setCidades(selectItemsCidades);
+			}
+		}
+	}
+
+	public List<SelectItem> getCidades() {
+		return cidades;
+	}
+
+	public void setCidades(List<SelectItem> cidades) {
+		this.cidades = cidades;
 	}
 
 	public List<Pessoa> getPessoas() {
@@ -177,4 +214,10 @@ public class PessoaBean {
 		this.daoGeneric = daoGeneric;
 	}
 
+	public List<SelectItem> getEstados() {
+
+		estados = iDaoPessoa.listaEstados();
+
+		return estados;
+	}
 }

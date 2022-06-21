@@ -69,7 +69,7 @@
 			<h:inputText value="#{pessoaBean.pessoa.dataNascimento}"
 				required="true"
 				requiredMessage="Informe a Data de Nascimento do usuário"
-				a:placeholder="Informe a data de nascimento" >
+				a:placeholder="Informe a data de nascimento">
 				<f:convertDateTime pattern="dd/MM/yyyy" dateStyle="full"
 					locale="pt_BR" />
 			</h:inputText>
@@ -144,9 +144,23 @@
 				<f:selectItem itemValue="5" itemLabel="Cobol" />
 			</h:selectManyCheckbox>
 
+			<h:outputLabel value="Estados: " />
+			<h:selectOneMenu value="#{pessoaBean.pessoa.estados}" immediate="true">
+				<f:selectItem itemLabel="--[Selecione]--"  noSelectionOption="true" />
+				<f:selectItems value="#{pessoaBean.estados}" />
+				<f:ajax event="change" execute="@this" listener="#{pessoaBean.carregarCidades}" />
+			</h:selectOneMenu>
+			
+			<h:outputLabel value="Cidades: " />
+			<h:selectOneMenu value="#{pessoaBean.pessoa.cidades}" immediate="true">
+				<f:selectItem itemLabel="--[Selecione]--"  noSelectionOption="true" />
+				<f:selectItems value="#{pessoaBean.cidades}" />
+				<f:ajax event="change" execute="@this" listener="#{pessoaBean.carregarCidades}" />
+			</h:selectOneMenu>
+
 			<h:outputLabel />
 			<h:panelGroup>
-				<h:commandButton title="Salvar" value="Salvar"
+				<h:commandButton title="Salvar" value="Salvar" 
 					action="#{pessoaBean.salvar()}" image="/resources/img/Salvar.png" />
 
 				<h:commandButton title="Novo" value="Novo" id="botaoNovo"
