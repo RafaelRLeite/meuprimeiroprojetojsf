@@ -98,6 +98,19 @@ public class PessoaBean {
 		return "index.jsf";
 	}
 
+	public String deslogar() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		externalContext.getSessionMap().remove("usuarioLogado");
+
+		HttpServletRequest req = (HttpServletRequest) externalContext.getRequest();
+		HttpSession session = req.getSession();
+
+		session.invalidate();
+
+		return "index.jsf";
+	}
+	
 	public boolean permiteAcesso(String acesso) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = context.getExternalContext();

@@ -3,7 +3,8 @@
 <f:view xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<html>
 
@@ -29,26 +30,31 @@
 			<h:outputLabel value="Nome" />
 			<h:inputText value="#{pessoaBean.pessoa.nome}" required="true"
 				requiredMessage="Informe o nome do usuário"
-				validatorMessage="Nome tem que ter no minímo 05 letras">
+				validatorMessage="Nome tem que ter no minímo 05 letras"
+				a:placeholder="Informe o nome">
 				<f:validateLength minimum="5" maximum="50" />
 			</h:inputText>
 
 			<h:outputLabel value="Sobrenome" />
 			<h:inputText value="#{pessoaBean.pessoa.sobrenome}" required="true"
-				requiredMessage="Informe o Sobrenome do usuário" />
+				requiredMessage="Informe o Sobrenome do usuário"
+				a:placeholder="Informe o sobrenome" />
 
 			<h:outputLabel value="Idade" />
 			<h:inputText value="#{pessoaBean.pessoa.idade}" required="true"
-				requiredMessage="Informe a Idade do usuário" />
+				requiredMessage="Informe a Idade do usuário"
+				a:placeholder="Informe a idade" />
 
 			<h:outputLabel value="CPF" />
 			<h:inputText value="#{pessoaBean.pessoa.CPF}" required="true"
-				requiredMessage="Informe o CPF do usuário" />
+				requiredMessage="Informe o CPF do usuário"
+				a:placeholder="Informe o CPF" />
 
 			<h:outputLabel value="Titulo Eleitoral" />
 			<h:inputText value="#{pessoaBean.pessoa.tituloEleitoral}"
 				required="true"
-				requiredMessage="Informe o Titulo Eleitoral do usuário" />
+				requiredMessage="Informe o Titulo Eleitoral do usuário"
+				a:placeholder="Informe o titulo eleitoral" />
 
 			<h:outputLabel value="Sexo" />
 			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo }"
@@ -62,7 +68,8 @@
 			<h:outputLabel value="Nascimento: " />
 			<h:inputText value="#{pessoaBean.pessoa.dataNascimento}"
 				required="true"
-				requiredMessage="Informe a Data de Nascimento do usuário">
+				requiredMessage="Informe a Data de Nascimento do usuário"
+				a:placeholder="Informe a data de nascimento" >
 				<f:convertDateTime pattern="dd/MM/yyyy" dateStyle="full"
 					locale="pt_BR" />
 			</h:inputText>
@@ -78,9 +85,11 @@
 			</h:selectManyMenu>
 
 			<h:outputLabel value="CEP" />
-			<h:inputText value="#{pessoaBean.pessoa.cep}">
+			<h:inputText value="#{pessoaBean.pessoa.cep}"
+				a:placeholder="Informe a CEP">
 				<f:ajax event="blur" execute="@this"
-					listener="#{pessoaBean.pesquisaCep}" render="logradouro complemento bairro localidade UF" />
+					listener="#{pessoaBean.pesquisaCep}"
+					render="logradouro complemento bairro localidade UF" />
 			</h:inputText>
 
 			<h:outputLabel value="Logradouro" />

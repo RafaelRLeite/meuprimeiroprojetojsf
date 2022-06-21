@@ -24,8 +24,8 @@ public class Pessoa implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento = new Date();
 	private String sexo;
-	private Long CPF;
-	private Long tituloEleitoral;
+	private String CPF;
+	private String tituloEleitoral;
 	private String[] frameworks;
 	private Boolean ativo;
 	private String senha;
@@ -39,44 +39,8 @@ public class Pessoa implements Serializable {
 	private String bairro;
 	private String localidade;
 	private String uf;
-	private String ibge;
-	private String gia;
-	private String ddd;
-	private String siafi;
 
 	public Pessoa() {
-	}
-
-	public String getIbge() {
-		return ibge;
-	}
-
-	public void setIbge(String ibge) {
-		this.ibge = ibge;
-	}
-
-	public String getGia() {
-		return gia;
-	}
-
-	public void setGia(String gia) {
-		this.gia = gia;
-	}
-
-	public String getDdd() {
-		return ddd;
-	}
-
-	public void setDdd(String ddd) {
-		this.ddd = ddd;
-	}
-
-	public String getSiafi() {
-		return siafi;
-	}
-
-	public void setSiafi(String siafi) {
-		this.siafi = siafi;
 	}
 
 	public String getCep() {
@@ -127,19 +91,19 @@ public class Pessoa implements Serializable {
 		this.uf = uf;
 	}
 
-	public Long getCPF() {
+	public String getCPF() {
 		return CPF;
 	}
 
-	public void setCPF(Long cPF) {
+	public void setCPF(String cPF) {
 		CPF = cPF;
 	}
 
-	public Long getTituloEleitoral() {
+	public String getTituloEleitoral() {
 		return tituloEleitoral;
 	}
 
-	public void setTituloEleitoral(Long tituloEleitoral) {
+	public void setTituloEleitoral(String tituloEleitoral) {
 		this.tituloEleitoral = tituloEleitoral;
 	}
 
