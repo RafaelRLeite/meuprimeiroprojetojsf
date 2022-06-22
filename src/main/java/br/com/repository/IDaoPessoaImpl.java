@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.model.SelectItem;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 
 import br.com.entidades.Estados;
@@ -41,8 +42,8 @@ public class IDaoPessoaImpl implements IDaoPessoa {
 		EntityManager entityManager = JPAUtil.getEntityManager();
 
 		try {
-			// EntityTransaction entityTransaction = entityManager.getTransaction();
-			// entityTransaction.begin();
+			EntityTransaction entityTransaction = entityManager.getTransaction();
+			entityTransaction.begin();
 			List<Estados> estados = entityManager.createQuery("from Estados").getResultList();
 
 			for (Estados estado : estados) {

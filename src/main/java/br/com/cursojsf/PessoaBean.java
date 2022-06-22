@@ -175,13 +175,13 @@ public class PessoaBean {
 
 				List<Cidades> cidades = JPAUtil.getEntityManager().createQuery("from Cidades where estados.id = " + codigoEstado).getResultList();
 
-				List<SelectItem> selectItemsCidades = new ArrayList<SelectItem>();
+				List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 
 				for (Cidades cidade : cidades) {
-					selectItemsCidades.add(new SelectItem(cidade.getId(), cidade.getNome()));
+					selectItemsCidade.add(new SelectItem(cidade.getId(), cidade.getNome()));
 				}
 
-				setCidades(selectItemsCidades);
+				setCidades(selectItemsCidade);
 			}
 		}
 	}
