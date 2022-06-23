@@ -9,7 +9,6 @@ import javax.faces.convert.FacesConverter;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import br.com.entidades.Cidades;
 import br.com.entidades.Estados;
 import br.com.jpautil.JPAUtil;
 
@@ -36,9 +35,9 @@ public class EstadoConverter implements Converter, Serializable {
 			return null;
 		}
 
-		if (estado instanceof Cidades) {
+		if (estado instanceof Estados) {
 
-			return ((Cidades) estado).getId().toString();
+			return ((Estados) estado).getId().toString();
 		}
 
 		else {

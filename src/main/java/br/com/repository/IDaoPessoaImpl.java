@@ -44,10 +44,11 @@ public class IDaoPessoaImpl implements IDaoPessoa {
 		try {
 			EntityTransaction entityTransaction = entityManager.getTransaction();
 			entityTransaction.begin();
+
 			List<Estados> estados = entityManager.createQuery("from Estados").getResultList();
 
 			for (Estados estado : estados) {
-				selecItems.add(new SelectItem(estado.getId(), estado.getNome()));
+				selecItems.add(new SelectItem(estado, estado.getNome()));
 			}
 		} catch (NoResultException e) {
 			return null;

@@ -1,6 +1,10 @@
 package br.com.cursojsf;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -12,12 +16,15 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.html.HtmlSelectOneMenu;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 
@@ -40,7 +47,27 @@ public class PessoaBean {
 	private List<SelectItem> estados;
 	private List<SelectItem> cidades;
 
-	public String salvar() {
+	private Part arquivoFoto;
+
+	public String salvar() throws IOException {
+
+		/* Processar imagem */
+		byte[] imagemByte = getByte(arquivoFoto.getInputStream());
+		pessoa.setFotoIconBase64Original(imagemByte); /* Foto original */
+
+		/* Transformar em bufferimage */
+		BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagemByte));
+
+		/* Pega o tipo da imagem */
+		int type = bufferedImage.getType() == 0 ? bufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
+
+		int largura = 200;
+		int altura = 200;
+
+		/* Processar imagem */
+
+		System.out.println(arquivoFoto);
+
 		pessoa = daoGeneric.Merge(pessoa);
 		carregarPessoas();
 		mostrarMsg("Cadastrado com sucesso");
@@ -69,6 +96,26 @@ public class PessoaBean {
 		pessoa = new Pessoa();
 		carregarPessoas();
 		mostrarMsg("Cadastrado removido com sucesso");
+		return "";
+	}
+
+	public String editar() {
+		System.out.println(pessoa);
+		if (pessoa.getCidades() != null) {
+			Estados estado = pessoa.getCidades().getEstados();
+			pessoa.setEstados(estado);
+
+			List<Cidades> cidades = JPAUtil.getEntityManager().createQuery("from Cidades where estados.id = " + estado.getId()).getResultList();
+
+			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
+
+			for (Cidades cidade : cidades) {
+				selectItemsCidade.add(new SelectItem(cidade, cidade.getNome()));
+			}
+
+			setCidades(selectItemsCidade);
+		}
+
 		return "";
 	}
 
@@ -165,25 +212,49 @@ public class PessoaBean {
 
 	public void carregarCidades(AjaxBehaviorEvent event) {
 
-		String codigoEstado = (String) event.getComponent().getAttributes().get("submittedValue");
+		// String codigoEstado = (String) event.getComponent().getAttributes().get("submittedValue"); /* Pega somento o ID do objeto Estados */
 
-		if (codigoEstado != null) {
-			Estados estado = JPAUtil.getEntityManager().find(Estados.class, Long.parseLong(codigoEstado));
+		Estados estado = (Estados) ((HtmlSelectOneMenu) event.getSource()).getValue();
 
-			if (pessoa != null) {
-				pessoa.setEstados(estado);
+		// if (codigoEstado != null) {
+		// Estados estado = JPAUtil.getEntityManager().find(Estados.class, Long.parseLong(codigoEstado));
 
-				List<Cidades> cidades = JPAUtil.getEntityManager().createQuery("from Cidades where estados.id = " + codigoEstado).getResultList();
+		if (estado != null) {
+			pessoa.setEstados(estado);
 
-				List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
+			List<Cidades> cidades = JPAUtil.getEntityManager().createQuery("from Cidades where estados.id = " + estado.getId()).getResultList();
 
-				for (Cidades cidade : cidades) {
-					selectItemsCidade.add(new SelectItem(cidade.getId(), cidade.getNome()));
-				}
+			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 
-				setCidades(selectItemsCidade);
+			for (Cidades cidade : cidades) {
+				selectItemsCidade.add(new SelectItem(cidade, cidade.getNome()));
 			}
+
+			setCidades(selectItemsCidade);
 		}
+	}
+
+	/* Metodo que converte um inputStream em um array de bytes */
+	private byte[] getByte(InputStream is) throws IOException {
+
+		int len;
+		int size = 1024;
+		byte[] buf = null;
+		if (is instanceof ByteArrayInputStream) {
+			size = is.available();
+			buf = new byte[size];
+			len = is.read(buf, 0, size);
+		} else {
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			buf = new byte[size];
+
+			while ((len = is.read(buf, 0, size)) != -1) {
+				bos.write(buf, 0, len);
+			}
+
+			buf = bos.toByteArray();
+		}
+		return buf;
 	}
 
 	public List<SelectItem> getCidades() {
@@ -220,4 +291,13 @@ public class PessoaBean {
 
 		return estados;
 	}
+
+	public Part getArquivoFoto() {
+		return arquivoFoto;
+	}
+
+	public void setArquivoFoto(Part arquivoFoto) {
+		this.arquivoFoto = arquivoFoto;
+	}
+
 }

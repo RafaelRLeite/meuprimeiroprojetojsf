@@ -16,7 +16,9 @@
 
 	<ui:include src="/menu.xhtml" />
 
-	<h:form id="formPessoa" style="margin-top:2%; margin-left:2%">
+	<!-- enctype="" muda o tipo do formulário para receber arquivos -->
+	<h:form id="formPessoa" enctype="multipart/form-data"
+		style="margin-top:2%; margin-left:2%">
 
 		<h:messages infoStyle="color:red;background:#F5F5DC" />
 
@@ -26,6 +28,9 @@
 			</f:facet>
 			<h:outputLabel value="Id" />
 			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true" />
+
+			<h:outputLabel value="Foto: " />
+			<h:inputFile id="foto" value="#{pessoaBean.arquivoFoto}" />
 
 			<h:outputLabel value="Nome" />
 			<h:inputText value="#{pessoaBean.pessoa.nome}" required="true"
@@ -209,7 +214,7 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Editar</f:facet>
-				<h:commandLink title="Editar" immediate="true">
+				<h:commandLink action="#{pessoaBean.editar()}" immediate="true">
 					<!-- // immediate="true" inicia sem fazer validação -->
 					<h:graphicImage value="/resources/img/Editar.png" />
 					<f:setPropertyActionListener target="#{pessoaBean.pessoa}"
