@@ -38,6 +38,7 @@
 				validatorMessage="Nome tem que ter no minímo 05 letras"
 				a:placeholder="Informe o nome">
 				<f:validateLength minimum="5" maximum="50" />
+				<f:validateRegex pattern="[a-zA-Z]+" />
 			</h:inputText>
 
 			<h:outputLabel value="Sobrenome" />
@@ -205,6 +206,14 @@
 				<h:outputText value="#{pessoa.nome}" />
 			</h:column>
 			<h:column>
+				<f:facet name="header">Foto</f:facet>
+				<h:commandLink actionListener="#{pessoaBean.download}">
+					<h:graphicImage width="60" height="60"
+						value="#{pessoa.fotoIconBase64}" />
+					<f:param name="fileDownLoadId" value="#{pessoa.id}" />
+				</h:commandLink>
+			</h:column>
+			<h:column>
 				<f:facet name="header">Sobrenome da pessoa</f:facet>
 				<h:outputText value="#{pessoa.sobrenome}" />
 			</h:column>
@@ -212,6 +221,7 @@
 				<f:facet name="header">Idade</f:facet>
 				<h:outputText value="#{pessoa.idade}" />
 			</h:column>
+
 			<h:column>
 				<f:facet name="header">Editar</f:facet>
 				<h:commandLink action="#{pessoaBean.editar()}" immediate="true">

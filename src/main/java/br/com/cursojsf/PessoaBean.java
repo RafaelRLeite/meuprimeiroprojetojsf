@@ -1,5 +1,6 @@
 package br.com.cursojsf;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -11,6 +12,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -23,8 +25,10 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.xml.bind.DatatypeConverter;
 
 import com.google.gson.Gson;
 
@@ -64,7 +68,24 @@ public class PessoaBean {
 		int largura = 200;
 		int altura = 200;
 
+		/* Criar miniatura */
+		BufferedImage resizedImagem = new BufferedImage(largura, altura, type);
+		Graphics2D g = resizedImagem.createGraphics();
+		g.drawImage(bufferedImage, 0, 0, largura, altura, null);
+		g.dispose();
+
+		/* Escrever novamente a imagem em tamanho menor */
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		String extensao = arquivoFoto.getContentType().split("\\/")[1]; /* retorna ex: image/png */
+		ImageIO.write(resizedImagem, extensao, baos);
+
+		/* o cabeçalho para imprimir imagem na tela é assim: data:image/pnj;base64, */
+		String miniImagem = "data:" + arquivoFoto.getContentType() + ";base64," + DatatypeConverter.printBase64Binary(baos.toByteArray());
+
 		/* Processar imagem */
+
+		pessoa.setFotoIconBase64(miniImagem);
+		pessoa.setExtensao(extensao);
 
 		System.out.println(arquivoFoto);
 
@@ -255,6 +276,23 @@ public class PessoaBean {
 			buf = bos.toByteArray();
 		}
 		return buf;
+	}
+
+	public void download() throws IOException {
+
+		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String fileDownLoadId = params.get("fileDownLoadId");
+
+		Pessoa pessoa = daoGeneric.consultar(Pessoa.class, fileDownLoadId);
+
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+
+		response.addHeader("Content-Disposition", " attachment; filename=download." + pessoa.getExtensao());
+		response.setContentType("application/octet-stream");
+		response.setContentLength(pessoa.getFotoIconBase64Original().length);
+		response.getOutputStream().write(pessoa.getFotoIconBase64Original());
+		response.getOutputStream().flush();
+		FacesContext.getCurrentInstance().responseComplete();
 	}
 
 	public List<SelectItem> getCidades() {

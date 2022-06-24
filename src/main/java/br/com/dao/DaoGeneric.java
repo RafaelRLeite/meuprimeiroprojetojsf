@@ -59,7 +59,6 @@ public class DaoGeneric<E> {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<E> getListEntity(Class<E> entidade) {
 		EntityManager entityManager = JPAUtil.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -71,5 +70,16 @@ public class DaoGeneric<E> {
 		entityManager.close();
 
 		return retorno;
+	}
+
+	public E consultar(Class<E> entidade, String codigo) {
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+
+		E objeto = entityManager.find(entidade, Long.parseLong(codigo));
+		entityTransaction.commit();
+		return objeto;
+
 	}
 }
