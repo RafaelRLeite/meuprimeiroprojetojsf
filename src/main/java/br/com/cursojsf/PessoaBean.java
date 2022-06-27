@@ -63,7 +63,7 @@ public class PessoaBean {
 		BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagemByte));
 
 		/* Pega o tipo da imagem */
-		int type = bufferedImage.getType() == 0 ? bufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
+		int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
 
 		int largura = 200;
 		int altura = 200;
@@ -86,8 +86,6 @@ public class PessoaBean {
 
 		pessoa.setFotoIconBase64(miniImagem);
 		pessoa.setExtensao(extensao);
-
-		System.out.println(arquivoFoto);
 
 		pessoa = daoGeneric.Merge(pessoa);
 		carregarPessoas();

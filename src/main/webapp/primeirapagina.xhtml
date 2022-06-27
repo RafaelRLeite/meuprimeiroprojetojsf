@@ -42,9 +42,7 @@
 			</h:inputText>
 
 			<h:outputLabel value="Sobrenome" />
-			<h:inputText value="#{pessoaBean.pessoa.sobrenome}" required="true"
-				requiredMessage="Informe o Sobrenome do usuário"
-				a:placeholder="Informe o sobrenome" />
+			<h:inputText value="#{pessoaBean.pessoa.sobrenome}" />
 
 			<h:outputLabel value="Idade" />
 			<h:inputText value="#{pessoaBean.pessoa.idade}" required="true"
@@ -233,7 +231,8 @@
 			</h:column>
 			<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 				<f:facet name="header">Excluir</f:facet>
-				<h:commandLink action="#{pessoaBean.remove()}" title="Excluir">
+				<h:commandLink action="#{pessoaBean.remove()}" title="Excluir"
+					immediate="true">
 					<f:setPropertyActionListener value="#{pessoa}"
 						target="#{pessoaBean.pessoa}" />
 					<h:graphicImage value="/resources/img/Delete.png" />
