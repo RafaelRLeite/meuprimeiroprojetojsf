@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.br.TituloEleitoral;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -48,8 +49,13 @@ public class Pessoa implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento = new Date();
 	private String sexo;
+
+	@org.hibernate.validator.constraints.br.CPF(message = "CPF invalido")
 	private String CPF;
+
+	@TituloEleitoral(message = "Titulo Eleitoral invalido")
 	private String tituloEleitoral;
+
 	private String[] frameworks;
 	private Boolean ativo;
 	private String senha;

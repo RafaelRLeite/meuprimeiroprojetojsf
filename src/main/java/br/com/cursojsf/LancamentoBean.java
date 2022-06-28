@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +18,7 @@ import br.com.repository.IDaoLancamento;
 import br.com.repository.IDaoLancamentoImpl;
 
 @ViewScoped
-@ManagedBean(name = "lancamentoBean")
+@Named(value = "lancamentoBean")
 public class LancamentoBean {
 
 	private Lancamento lancamento = new Lancamento();

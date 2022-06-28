@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
@@ -14,12 +15,15 @@ import br.com.jpautil.JPAUtil;
 
 public class IDaoPessoaImpl implements IDaoPessoa {
 
+	@Inject
+	private JPAUtil jpaUtil;
+
 	@Override
 	public Pessoa consultarUsuario(String login, String senha) {
 
 		Pessoa pessoa = null;
 
-		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityManager entityManager = jpaUtil.getEntityManager();
 
 		try {
 			// EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -39,7 +43,7 @@ public class IDaoPessoaImpl implements IDaoPessoa {
 
 		List<SelectItem> selecItems = new ArrayList<SelectItem>();
 
-		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityManager entityManager = jpaUtil.getEntityManager();
 
 		try {
 			EntityTransaction entityTransaction = entityManager.getTransaction();

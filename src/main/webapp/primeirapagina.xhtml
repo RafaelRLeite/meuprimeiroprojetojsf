@@ -16,7 +16,6 @@
 
 	<ui:include src="/menu.xhtml" />
 
-	<!-- enctype="" muda o tipo do formulário para receber arquivos -->
 	<h:form id="formPessoa" enctype="multipart/form-data"
 		style="margin-top:2%; margin-left:2%">
 
@@ -33,7 +32,9 @@
 			<h:inputFile id="foto" value="#{pessoaBean.arquivoFoto}" />
 
 			<h:outputLabel value="Nome" />
-			<h:inputText value="#{pessoaBean.pessoa.nome}" required="true"
+			<h:inputText value="#{pessoaBean.pessoa.nome}"
+				valueChangeListener="#{pessoaBean.mudancaDeValor}"
+				onblur="alert('Perdeu o foco')" required="true"
 				requiredMessage="Informe o nome do usuário"
 				validatorMessage="Nome tem que ter no minímo 05 letras"
 				a:placeholder="Informe o nome">
@@ -42,23 +43,17 @@
 			</h:inputText>
 
 			<h:outputLabel value="Sobrenome" />
-			<h:inputText value="#{pessoaBean.pessoa.sobrenome}" />
+			<h:inputText value="#{pessoaBean.pessoa.sobrenome}"
+				valueChangeListener="#{pessoaBean.mudancaDeValorSobrenome}" />
 
 			<h:outputLabel value="Idade" />
-			<h:inputText value="#{pessoaBean.pessoa.idade}" required="true"
-				requiredMessage="Informe a Idade do usuário"
-				a:placeholder="Informe a idade" />
+			<h:inputText value="#{pessoaBean.pessoa.idade}" />
 
 			<h:outputLabel value="CPF" />
-			<h:inputText value="#{pessoaBean.pessoa.CPF}" required="true"
-				requiredMessage="Informe o CPF do usuário"
-				a:placeholder="Informe o CPF" />
+			<h:inputText value="#{pessoaBean.pessoa.CPF}" />
 
 			<h:outputLabel value="Titulo Eleitoral" />
-			<h:inputText value="#{pessoaBean.pessoa.tituloEleitoral}"
-				required="true"
-				requiredMessage="Informe o Titulo Eleitoral do usuário"
-				a:placeholder="Informe o titulo eleitoral" />
+			<h:inputText value="#{pessoaBean.pessoa.tituloEleitoral}" />
 
 			<h:outputLabel value="Sexo" />
 			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo }"
@@ -166,7 +161,9 @@
 
 			<h:outputLabel />
 			<h:panelGroup>
+				<!-- actionListener é chamado antes do action e não faz redirecionamento -->
 				<h:commandButton title="Salvar" value="Salvar"
+					actionListener="#{pessoaBean.registraLog()}"
 					action="#{pessoaBean.salvar()}" image="/resources/img/Salvar.png" />
 
 				<h:commandButton title="Novo" value="Novo" id="botaoNovo"

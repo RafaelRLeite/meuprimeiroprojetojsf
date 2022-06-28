@@ -6,6 +6,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -16,10 +17,13 @@ import br.com.jpautil.JPAUtil;
 public class CidadeConverter implements Converter, Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Inject
+	private JPAUtil jpaUtil;
+
 	@Override /* Retorna o objeto inteiro */
 	public Object getAsObject(FacesContext context, UIComponent component, String codigoCidade) {
 
-		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityManager entityManager = jpaUtil.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 
