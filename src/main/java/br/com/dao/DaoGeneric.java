@@ -1,5 +1,6 @@
 package br.com.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,13 +11,15 @@ import javax.persistence.EntityTransaction;
 import br.com.jpautil.JPAUtil;
 
 @Named
-public class DaoGeneric<E> {
+public class DaoGeneric<E> implements Serializable {
 
-	@Inject
-	private JPAUtil jpaUtil;
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private EntityManager entityManager;
+
+	@Inject
+	private JPAUtil jpaUtil;
 
 	public void salvar(E entidade) {
 		EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -76,7 +79,9 @@ public class DaoGeneric<E> {
 		entityTransaction.begin();
 
 		E objeto = entityManager.find(entidade, Long.parseLong(codigo));
+
 		entityTransaction.commit();
+
 		return objeto;
 
 	}

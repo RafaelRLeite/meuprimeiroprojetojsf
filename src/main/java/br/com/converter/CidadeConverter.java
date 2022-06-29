@@ -2,34 +2,31 @@ package br.com.converter;
 
 import java.io.Serializable;
 
+import javax.enterprise.inject.spi.CDI;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
 import br.com.entidades.Cidades;
-import br.com.jpautil.JPAUtil;
 
 @FacesConverter(forClass = Cidades.class, value = "cidadeConverte")
 public class CidadeConverter implements Converter, Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Inject
-	private JPAUtil jpaUtil;
+	private static final long serialVersionUID = 1L;
 
 	@Override /* Retorna o objeto inteiro */
 	public Object getAsObject(FacesContext context, UIComponent component, String codigoCidade) {
 
-		EntityManager entityManager = jpaUtil.getEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
+		EntityManager entityManager = CDI.current().select(EntityManager.class).get();
 
 		Cidades cidade = entityManager.find(Cidades.class, Long.parseLong(codigoCidade));
 
+		// entityManager.close();
+
 		return cidade;
+
 	}
 
 	@Override /* Retorna apenas o código em String */

@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -22,10 +23,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
-import javax.faces.view.ViewScoped;
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,19 +39,22 @@ import br.com.dao.DaoGeneric;
 import br.com.entidades.Cidades;
 import br.com.entidades.Estados;
 import br.com.entidades.Pessoa;
-import br.com.jpautil.JPAUtil;
 import br.com.repository.IDaoPessoa;
 
-@ViewScoped
 @Named(value = "pessoaBean")
-public class PessoaBean {
+@javax.faces.view.ViewScoped
+public class PessoaBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Pessoa pessoa = new Pessoa();
+	private List<Pessoa> pessoas = new ArrayList<Pessoa>();
+
+	@Inject
+	private EntityManager entityManager;
 
 	@Inject
 	private DaoGeneric<Pessoa> daoGeneric;
-
-	private List<Pessoa> pessoas = new ArrayList<Pessoa>();
 
 	@Inject
 	private IDaoPessoa iDaoPessoa;
@@ -59,9 +63,6 @@ public class PessoaBean {
 	private List<SelectItem> cidades;
 
 	private Part arquivoFoto;
-
-	@Inject
-	private JPAUtil jpaUtil;
 
 	public String salvar() throws IOException {
 
@@ -133,7 +134,7 @@ public class PessoaBean {
 			Estados estado = pessoa.getCidades().getEstados();
 			pessoa.setEstados(estado);
 
-			List<Cidades> cidades = jpaUtil.getEntityManager().createQuery("from Cidades where estados.id = " + estado.getId()).getResultList();
+			List<Cidades> cidades = entityManager.createQuery("from Cidades where estados.id = " + estado.getId()).getResultList();
 
 			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 
@@ -143,6 +144,8 @@ public class PessoaBean {
 
 			setCidades(selectItemsCidade);
 		}
+
+		// entityManager.close();
 
 		return "";
 	}
@@ -250,7 +253,7 @@ public class PessoaBean {
 		if (estado != null) {
 			pessoa.setEstados(estado);
 
-			List<Cidades> cidades = jpaUtil.getEntityManager().createQuery("from Cidades where estados.id = " + estado.getId()).getResultList();
+			List<Cidades> cidades = entityManager.createQuery("from Cidades where estados.id = " + estado.getId()).getResultList();
 
 			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 
@@ -260,6 +263,8 @@ public class PessoaBean {
 
 			setCidades(selectItemsCidade);
 		}
+
+		entityManager.close();
 	}
 
 	/* Metodo que converte um inputStream em um array de bytes */
@@ -304,6 +309,7 @@ public class PessoaBean {
 
 	public void registraLog() {
 		System.out.println("método registrado");
+		/* Criar a rotina de gravação do log */
 	}
 
 	public void mudancaDeValor(ValueChangeEvent evento) {
@@ -356,4 +362,5 @@ public class PessoaBean {
 	public void setArquivoFoto(Part arquivoFoto) {
 		this.arquivoFoto = arquivoFoto;
 	}
+
 }

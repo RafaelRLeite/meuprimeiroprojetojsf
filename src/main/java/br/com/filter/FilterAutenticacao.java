@@ -1,6 +1,7 @@
 package br.com.filter;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.inject.Inject;
 import javax.servlet.Filter;
@@ -18,13 +19,15 @@ import br.com.entidades.Pessoa;
 import br.com.jpautil.JPAUtil;
 
 @WebFilter(urlPatterns = { "/*" })
-public class FilterAutenticacao implements Filter {
+public class FilterAutenticacao implements Filter, Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private JPAUtil jpaUtil;
 
 	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
+	public void init(FilterConfig arg0) throws ServletException {
 		jpaUtil.getEntityManager();
 	}
 
@@ -35,6 +38,7 @@ public class FilterAutenticacao implements Filter {
 		HttpSession session = req.getSession();
 
 		Pessoa usuarioLogado = (Pessoa) session.getAttribute("usuarioLogado");
+
 		String url = req.getServletPath();
 
 		if (!url.equalsIgnoreCase("index.jsf") && usuarioLogado == null) {
