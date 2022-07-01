@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <f:view xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
 
 	<html>
 
@@ -12,22 +13,33 @@
 
 <h:body>
 
-	<h:form id="formlogin" style="margin-top:15%; margin-left:40%">
+	<b:messages id="msg" autoUpdate="true" />
+	<b:form id="formlogin" style="margin-top:15%; margin-left:25%">
 
 		<h1>Realize o login</h1>
 
-		<h:panelGrid columns="2">
-			<h:outputLabel value="Login: " />
-			<h:inputText value="#{pessoaBean.pessoa.login}" />
+		<b:panelGrid columns="3">
+			<b:panel>
+				<b:column>
+					<h:outputLabel value="Login: " />
+					<b:inputText id="login" value="#{pessoaBean.pessoa.login}"
+						required="true" requiredMessage="Informe o login" />
+				</b:column>
+			</b:panel>
+			<b:panel>
+				<b:column>
+					<h:outputLabel value="Senha: " />
+					<b:inputSecret id="senha" value="#{pessoaBean.pessoa.senha}"
+						required="true" requiredMessage="Informe a senha" />
+				</b:column>
+			</b:panel>
+		</b:panelGrid>
 
-			<h:outputLabel value="Senha: " />
-			<h:inputSecret value="#{pessoaBean.pessoa.senha}" />
-			
-			<h:commandButton action="#{pessoaBean.logar()}" value="Acessar" />
-			<h:commandButton type="reset" value="Limpar" />
-		</h:panelGrid>
+		<b:commandButton action="#{pessoaBean.logar()}" value="Acessar"
+			style="width: 66%" />
+		<!-- <b:commandButton type="reset" value="Limpar" style="width: 100%" /> botão limpar -->
 
-	</h:form>
+	</b:form>
 
 </h:body>
 

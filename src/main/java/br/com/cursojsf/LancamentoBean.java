@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -46,6 +47,7 @@ public class LancamentoBean implements Serializable {
 
 		carregarLancamento();
 
+		mostraMsg("Lancamento salvo com sucesso");
 		return "";
 	}
 
@@ -66,6 +68,8 @@ public class LancamentoBean implements Serializable {
 
 	public String novo() {
 		lancamento = new Lancamento();
+		// FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage("Cadastre novo lançamento"));
+		mostraMsg("Cadastre novo lançamento");
 		return "";
 	}
 
@@ -73,6 +77,7 @@ public class LancamentoBean implements Serializable {
 		daoGeneric.deletePorId(lancamento);
 		lancamento = new Lancamento();
 		carregarLancamento();
+		mostraMsg("Lancamento removido com sucesso");
 		return "";
 	}
 
@@ -87,6 +92,12 @@ public class LancamentoBean implements Serializable {
 
 		return pessoaUser.getPerfilUser().equals(acesso);
 
+	}
+
+	private void mostraMsg(String msg) {
+		FacesContext context = FacesContext.getCurrentInstance(); // FacesContext é o ambiente em que roda o JSF
+		FacesMessage message = new FacesMessage(msg);
+		context.addMessage(null, message);
 	}
 
 	public Lancamento getLancamento() {

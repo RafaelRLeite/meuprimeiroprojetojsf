@@ -17,7 +17,6 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.component.html.HtmlSelectOneMenu;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -40,6 +39,7 @@ import br.com.entidades.Cidades;
 import br.com.entidades.Estados;
 import br.com.entidades.Pessoa;
 import br.com.repository.IDaoPessoa;
+import net.bootsfaces.component.selectOneMenu.SelectOneMenu;
 
 @Named(value = "pessoaBean")
 @javax.faces.view.ViewScoped
@@ -66,37 +66,42 @@ public class PessoaBean implements Serializable {
 
 	public String salvar() throws IOException {
 
-		/* Processar imagem */
-		byte[] imagemByte = getByte(arquivoFoto.getInputStream());
-		pessoa.setFotoIconBase64Original(imagemByte); /* Foto original */
+		if (arquivoFoto != null) {
+			/* Processar imagem */
+			byte[] imagemByte = getByte(arquivoFoto.getInputStream());
 
-		/* Transformar em bufferimage */
-		BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagemByte));
+			/* Transformar em bufferimage */
+			BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagemByte));
 
-		/* Pega o tipo da imagem */
-		int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
+			if (bufferedImage != null) {
+				pessoa.setFotoIconBase64Original(imagemByte); /* Setando foto original */
 
-		int largura = 200;
-		int altura = 200;
+				/* Pega o tipo da imagem */
+				int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
 
-		/* Criar miniatura */
-		BufferedImage resizedImagem = new BufferedImage(largura, altura, type);
-		Graphics2D g = resizedImagem.createGraphics();
-		g.drawImage(bufferedImage, 0, 0, largura, altura, null);
-		g.dispose();
+				int largura = 200;
+				int altura = 200;
 
-		/* Escrever novamente a imagem em tamanho menor */
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		String extensao = arquivoFoto.getContentType().split("\\/")[1]; /* retorna ex: image/png */
-		ImageIO.write(resizedImagem, extensao, baos);
+				/* Criar miniatura */
+				BufferedImage resizedImagem = new BufferedImage(largura, altura, type);
+				Graphics2D g = resizedImagem.createGraphics();
+				g.drawImage(bufferedImage, 0, 0, largura, altura, null);
+				g.dispose();
 
-		/* o cabeçalho para imprimir imagem na tela é assim: data:image/pnj;base64, */
-		String miniImagem = "data:" + arquivoFoto.getContentType() + ";base64," + DatatypeConverter.printBase64Binary(baos.toByteArray());
+				/* Escrever novamente a imagem em tamanho menor */
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				String extensao = arquivoFoto.getContentType().split("\\/")[1]; /* retorna ex: image/png */
+				ImageIO.write(resizedImagem, extensao, baos);
 
-		/* Processar imagem */
+				/* o cabeçalho para imprimir imagem na tela é assim: data:image/pnj;base64, */
+				String miniImagem = "data:" + arquivoFoto.getContentType() + ";base64," + DatatypeConverter.printBase64Binary(baos.toByteArray());
 
-		pessoa.setFotoIconBase64(miniImagem);
-		pessoa.setExtensao(extensao);
+				/* Processar imagem */
+
+				pessoa.setFotoIconBase64(miniImagem);
+				pessoa.setExtensao(extensao);
+			}
+		}
 
 		pessoa = daoGeneric.Merge(pessoa);
 		carregarPessoas();
@@ -177,6 +182,8 @@ public class PessoaBean implements Serializable {
 			session.setAttribute("usuarioLogado", pessoaUser);
 
 			return "primeirapagina.jsf";
+		} else {
+			FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage("Usuário não encontrado"));
 		}
 
 		return "index.jsf";
@@ -245,7 +252,7 @@ public class PessoaBean implements Serializable {
 
 		// String codigoEstado = (String) event.getComponent().getAttributes().get("submittedValue"); /* Pega somento o ID do objeto Estados */
 
-		Estados estado = (Estados) ((HtmlSelectOneMenu) event.getSource()).getValue();
+		Estados estado = (Estados) ((SelectOneMenu) event.getSource()).getValue();
 
 		// if (codigoEstado != null) {
 		// Estados estado = JPAUtil.getEntityManager().find(Estados.class, Long.parseLong(codigoEstado));
@@ -312,6 +319,7 @@ public class PessoaBean implements Serializable {
 		/* Criar a rotina de gravação do log */
 	}
 
+	/* Metodo que printa no console a mudança do valor antigo para o novo do componente inputText Nome na tela */
 	public void mudancaDeValor(ValueChangeEvent evento) {
 		System.out.println("Valor antigo: " + evento.getOldValue() + ", Valor novo: " + evento.getNewValue());
 	}
