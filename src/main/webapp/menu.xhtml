@@ -5,16 +5,24 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:b="http://bootsfaces.net/ui">
 
+	<h:head>
+		<link href="resources/estilo.css" rel="stylesheet"></link>
+	</h:head>
+
 	<h:form>
-		<b:navBar brand="Menu" brandHref="/meuprimeiroprojetojsfgit/primeirapagina.jsf" fluid="true" >
+		<b:navBar brand="Menu"
+			brandHref="/meuprimeiroprojetojsfgit/primeirapagina.jsf" fluid="true">
 			<b:navbarLinks>
-				<b:navCommandLink action="primeirapagina" value="Administração" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" />
-				<b:navCommandLink action="lancamento?faces-redirect=true" value="Lançamentos" />
+				<b:navCommandLink action="primeirapagina" value="Administração"
+					rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" />
+				<b:navCommandLink action="lancamento?faces-redirect=true"
+					value="Lançamentos" />
 				<b:dropMenu value="Relatórios">
 					<b:navCommandLink value="Rel. Notas" action="rellancamento" />
-					<b:navCommandLink  value="Rel. Usuário" />	
+					<b:navCommandLink value="Rel. Usuário" action="relusuario" />
 				</b:dropMenu>
-				<b:navCommandLink action="#{pessoaBean.deslogar}" value="Trocar Usuário" />
+				<b:navCommandLink action="#{pessoaBean.deslogar}"
+					value="Trocar Usuário" />
 			</b:navbarLinks>
 		</b:navBar>
 	</h:form>

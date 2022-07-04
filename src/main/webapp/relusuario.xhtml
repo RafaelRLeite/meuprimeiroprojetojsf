@@ -9,7 +9,7 @@
 	<html>
 
 <h:head>
-	<title>Relatório de Lançamentos</title>
+	<title>Relatório de Usuários</title>
 	<link href="resources/estilo.css" rel="stylesheet"></link>
 </h:head>
 
@@ -17,7 +17,7 @@
 
 	<ui:include src="/menu.xhtml" />
 
-	<b:form id="formRelLancamento"
+	<b:form id="formPessoas"
 		style="margin-top:2%; margin-left:2%; margin-right:2%">
 
 		<b:messages id="msg" />
@@ -25,45 +25,39 @@
 
 			<b:column>
 				<h:outputLabel value="Data Inicial: " />
-				<b:datepicker value="#{RelLancamentoBean.dataIni}" mode="icon-popup"
+				<b:datepicker value="#{RelUsuarioBean.dataIni}" mode="icon-popup"
 					format="DD/MM/YYYY" locale="pt_BR" />
 			</b:column>
 
 			<b:column>
 				<h:outputLabel value="Data Final: " />
-				<b:datepicker value="#{RelLancamentoBean.dataFim}" mode="icon-popup"
+				<b:datepicker value="#{RelUsuarioBean.dataFim}" mode="icon-popup"
 					format="DD/MM/YYYY" locale="pt_BR" />
 			</b:column>
 
 			<b:column>
-				<h:outputLabel value="Numero da Nota: " />
-				<b:inputText value="#{RelLancamentoBean.numNota}" />
+				<h:outputLabel value="Nome: " />
+				<b:inputText value="#{RelUsuarioBean.nome}" />
 			</b:column>
 
 			<br />
 
 			<b:column>
 				<b:commandButton value="Buscar" look="primary"
-					action="#{RelLancamentoBean.buscarLancamento}" />
+					action="#{RelUsuarioBean.BuscarPessoa}" />
 			</b:column>
 
 		</b:panelGrid>
-
 
 	</b:form>
 
 	<b:form style="margin-top:3%; margin-left:1.5%; margin-right:1.5%">
 
-		<b:dataTable value="#{RelLancamentoBean.lancamentos}" var="lanc"
+		<b:dataTable value="#{RelUsuarioBean.pessoas}" var="pessoa"
 			caption="Lançamentos" pdf="true" excel="true">
 
-			<b:dataTableColumn value="#{lanc.id}" label="ID" />
-			<b:dataTableColumn value="#{lanc.numeroNotaFiscal}"
-				label="Nº da Nota Fiscal" />
-			<b:dataTableColumn value="#{lanc.usuario.nome}" label="Nome" />
-			<b:dataTableColumn value="#{lanc.dataInicial}" label="Inicial"
-				dataType="" />
-			<b:dataTableColumn value="#{lanc.dataFinal}" label=" Final" />
+			<b:dataTableColumn value="#{pessoa.id}" label="ID" />
+			<b:dataTableColumn value="#{pessoa.nome}" label="Nome" />
 
 		</b:dataTable>
 	</b:form>

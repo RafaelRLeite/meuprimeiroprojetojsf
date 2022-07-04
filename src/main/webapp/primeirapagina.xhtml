@@ -11,6 +11,7 @@
 
 <h:head>
 	<title>Cadastro de Usuário</title>
+	<link href="resources/estilo.css" rel="stylesheet"></link>
 </h:head>
 
 <h:body>
@@ -62,17 +63,18 @@
 
 				<b:column>
 					<h:outputLabel value="Idade" />
-					<b:inputText value="#{pessoaBean.pessoa.idade}" />
+					<b:inputText value="#{pessoaBean.pessoa.idade}" mask="numeric" />
 				</b:column>
 
 				<b:column>
 					<h:outputLabel value="CPF" />
-					<b:inputText value="#{pessoaBean.pessoa.CPF}" />
+					<b:inputText value="#{pessoaBean.pessoa.CPF}" mask="999.999.999-99" />
 				</b:column>
 
 				<b:column>
 					<h:outputLabel value="Titulo Eleitoral" />
-					<b:inputText value="#{pessoaBean.pessoa.tituloEleitoral}" />
+					<b:inputText value="#{pessoaBean.pessoa.tituloEleitoral}"
+						mask="9999999999999" />
 				</b:column>
 
 				<b:column>
@@ -188,7 +190,7 @@
 				<b:column>
 					<h:outputLabel value="CEP" />
 					<b:inputText value="#{pessoaBean.pessoa.cep}"
-						a:placeholder="Informe a CEP">
+						a:placeholder="Informe a CEP" mask="99999-999">
 						<f:ajax event="blur" execute="@this"
 							render="logradouro bairro localidade UF"
 							listener="#{pessoaBean.pesquisaCep}" />
@@ -262,7 +264,7 @@
 			<b:dataTableColumn value="#{pessoa.nome}" />
 			<b:dataTableColumn value="#{lanc.foto}">
 				<h:commandLink actionListener="#{pessoaBean.download}">
-					<h:graphicImage width="60" height="60"
+					<h:graphicImage width="30" height="30"
 						value="#{pessoa.fotoIconBase64}" />
 					<f:param name="fileDownLoadId" value="#{pessoa.id}" />
 				</h:commandLink>

@@ -2,6 +2,7 @@ package br.com.repository;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
@@ -58,4 +59,9 @@ public class IDaoPessoaImpl implements IDaoPessoa, Serializable {
 		return selecItems;
 	}
 
+	@Override
+	public List<Pessoa> relatorioPessoa(String nome, Date dataIni, Date dataFim) {
+
+		return null;
+	}
 }
