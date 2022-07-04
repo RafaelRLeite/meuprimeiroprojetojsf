@@ -14,30 +14,34 @@
 <h:body>
 
 	<b:messages id="msg" autoUpdate="true" />
-	<b:form id="formlogin" style="margin-top:15%; margin-left:25%">
+	<b:form id="formlogin"
+		style="margin-top:10%; margin-left:40%; margin-right:40%">
 
-		<h1>Realize o login</h1>
+		<h1 style="margin-left: 20%">Realize o login</h1>
 
-		<b:panelGrid columns="3">
+		<b:panelGrid columns="1" size="lg">
 			<b:panel>
+				<b:column>
+				</b:column>
+
 				<b:column>
 					<h:outputLabel value="Login: " />
 					<b:inputText id="login" value="#{pessoaBean.pessoa.login}"
 						required="true" requiredMessage="Informe o login" />
 				</b:column>
-			</b:panel>
-			<b:panel>
+
 				<b:column>
 					<h:outputLabel value="Senha: " />
 					<b:inputSecret id="senha" value="#{pessoaBean.pessoa.senha}"
 						required="true" requiredMessage="Informe a senha" />
 				</b:column>
+
+				<b:column>
+					<b:commandButton action="#{pessoaBean.logar()}" value="Acessar"
+						look="success" style="width:100%" />
+				</b:column>
 			</b:panel>
 		</b:panelGrid>
-
-		<b:commandButton action="#{pessoaBean.logar()}" value="Acessar"
-			style="width: 66%" />
-		<!-- <b:commandButton type="reset" value="Limpar" style="width: 100%" /> botão limpar -->
 
 	</b:form>
 

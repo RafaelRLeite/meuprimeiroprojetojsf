@@ -77,7 +77,7 @@ public class Pessoa implements Serializable {
 	private Estados estados;
 
 	@Column(columnDefinition = "text") /* Tipo text grava arquivos em base64 em miniatura */
-	private String fotoIconBase64;
+	private String foto;
 
 	private String extensao; /* Grava o tipo de extensão */
 
@@ -89,11 +89,11 @@ public class Pessoa implements Serializable {
 	}
 
 	public String getFotoIconBase64() {
-		return fotoIconBase64;
+		return foto;
 	}
 
 	public void setFotoIconBase64(String fotoIconBase64) {
-		this.fotoIconBase64 = fotoIconBase64;
+		this.foto = fotoIconBase64;
 	}
 
 	public String getExtensao() {

@@ -16,17 +16,16 @@
 
 	<ui:include src="/menu.xhtml" />
 
-
 	<b:form id="formlancamento"
-		style="margin-top:3%; margin-left:2%; margin-right:2%">
+		style="margin-top:2%; margin-left:2%; margin-right:2%">
 
 		<b:messages id="msg" />
 
-		<b:panelGrid columns="2">
+		<!--  <f:facet name="header">
+			<h:outputLabel value="Lançamentos" />
+		</f:facet> -> Tem que colocar dentro do PanelGrid -->
 
-			<f:facet name="header">
-				<h:outputLabel value="Lançamentos" />
-			</f:facet>
+		<b:panelGrid columns="2" size="sm">
 
 			<b:panel>
 				<h:column>
@@ -42,10 +41,10 @@
 				</h:column>
 
 				<h:column>
-					<h:outputLabel value="Data Inic.: " />
-					<b:dateTimePicker value="#{lancamentoBean.lancamento.dataInical}"
-						locale="pt" format="DD/MM/YYYY" required="true"
-						required-message="Informe a data inicial" />
+					<h:outputLabel value="Data Inicial: " />
+					<b:datepicker value="#{lancamentoBean.lancamento.dataInicial}"
+						locale="pt_BR" format="DD/MM/YYYY" required="true"
+						required-message="Informe a data inicial" mode="icon-popup" />
 				</h:column>
 			</b:panel>
 
@@ -64,23 +63,23 @@
 
 				<h:column>
 					<h:outputLabel value="Data Final: " />
-					<b:dateTimePicker  value="#{lancamentoBean.lancamento.dataFinal}"
-						locale="pt" format="DD/MM/YYYY" required="true"
-						required-message="Informe a data final" />
+					<b:datepicker value="#{lancamentoBean.lancamento.dataFinal}"
+						locale="pt_BR" format="DD/MM/YYYY" required="true"
+						required-message="Informe a data final" mode="icon-popup" />
 				</h:column>
 			</b:panel>
 
 			<h:column>
 				<h:panelGroup>
-					<h:commandButton value="Salvar" action="#{lancamentoBean.salvar()}"
+					<h:commandButton value="Salvar" action="#{lancamentoBean.salvar}"
 						image="/resources/img/Salvar.png" title="Salvar" />
 					<h:commandButton id="botaoNovo" style="margin-left:0.5cm"
-						value="Novo" action="#{lancamentoBean.novo()}"
+						value="Novo" action="#{lancamentoBean.novo}"
 						image="/resources/img/NovoUsuario.png" title="Novo">
 						<f:ajax execute="botaoNovo" render="@form" />
 					</h:commandButton>
 					<h:commandButton style="margin-left:0.5cm" value="Delete"
-						action="#{lancamentoBean.remove()}"
+						action="#{lancamentoBean.remove}"
 						image="/resources/img/Delete.png" title="Excluir"
 						rendered="#{lancamentoBean.permiteAcesso('ADMINISTRADOR')}" />
 					<h:commandButton id="botaoLimpar" style="margin-left:0.5cm"
@@ -98,35 +97,16 @@
 	<b:form style="margin-top:3%; margin-left:1.5%; margin-right:1.5%">
 
 		<b:dataTable value="#{lancamentoBean.lancamentos}" var="lanc"
-			border="3" cellpadding="6" rendered="true">
-			<f:facet name="header">
-				<h:outputLabel value="Lista de Lançamentos" />
-			</f:facet>
+			caption="Lista de Lançamentos">
 
-			<h:column>
-				<f:facet name="header">ID</f:facet>
-				<h:outputLabel value="#{lanc.id}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Numero da Nota Fiscal</f:facet>
-				<h:outputLabel value="#{lanc.numeroNotaFiscal}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Empresa Origem</f:facet>
-				<h:outputLabel value="#{lanc.empresaOrigem}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Empresa Destino</f:facet>
-				<h:outputLabel value="#{lanc.empresaDestino}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Usuário</f:facet>
-				<h:outputLabel value="#{lanc.usuario.nome}" />
-			</h:column>
+			<b:dataTableColumn value="#{lanc.id}" label="ID" />
+			<b:dataTableColumn value="#{lanc.numeroNotaFiscal}"
+				label="Nº da Nota Fiscal" />
+			<b:dataTableColumn value="#{lanc.empresaOrigem}"
+				label="Empresa Origem" />
+			<b:dataTableColumn value="#{lanc.empresaDestino}"
+				label="Empresa Destino" />
+			<b:dataTableColumn value="#{lanc.usuario.nome}" label="Nome" />
 
 			<h:column>
 				<f:facet name="header">Editar</f:facet>
@@ -139,7 +119,7 @@
 
 			<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 				<f:facet name="header"> Excluir</f:facet>
-				<h:commandLink action="#{lancamentoBean.remove()}" title="Excluir">
+				<h:commandLink action="#{lancamentoBean.remove}" title="Excluir">
 					<f:setPropertyActionListener value="#{lanc}"
 						target="#{lancamentoBean.lancamento}" />
 					<h:graphicImage value="resources/img/Delete.png" />
@@ -147,7 +127,6 @@
 			</h:column>
 
 		</b:dataTable>
-
 	</b:form>
 
 </h:body>

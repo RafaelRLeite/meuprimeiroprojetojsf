@@ -27,21 +27,21 @@ public class Lancamento implements Serializable {
 	private String empresaDestino;
 
 	@Temporal(TemporalType.DATE)
-	private Date dataInical;
+	private Date dataInicial = new Date();
 
 	@Temporal(TemporalType.DATE)
-	private Date dataFinal;
+	private Date dataFinal = new Date();
 
 	@ManyToOne(optional = false)
 	@ForeignKey(name = "usuario_fk")
 	private Pessoa usuario;
 
-	public Date getDataInical() {
-		return dataInical;
+	public Date getDataInicial() {
+		return dataInicial;
 	}
 
-	public void setDataInical(Date dataInical) {
-		this.dataInical = dataInical;
+	public void setDataInicial(Date dataInicial) {
+		this.dataInicial = dataInicial;
 	}
 
 	public Date getDataFinal() {

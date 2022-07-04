@@ -57,17 +57,31 @@ public class DaoGeneric<E> implements Serializable {
 		entityTransaction.begin();
 
 		Object id = jpaUtil.getPrimaryKey(entidade);
-		entityManager.createQuery("delete from " + entidade.getClass().getCanonicalName() + " where id = " + id).executeUpdate();
+		entityManager.createQuery("delete from " + entidade.getClass().getCanonicalName() + " where id = " + id)
+				.executeUpdate();
 
 		entityTransaction.commit();
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<E> getListEntity(Class<E> entidade) {
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 
 		List<E> retorno = entityManager.createQuery("from " + entidade.getName()).getResultList();
+
+		entityTransaction.commit();
+
+		return retorno;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<E> getListEntityLimite10(Class<E> entidade) {
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+
+		List<E> retorno = entityManager.createQuery("from " + entidade.getName() + " order by id desc ").setMaxResults(10).getResultList();
 
 		entityTransaction.commit();
 

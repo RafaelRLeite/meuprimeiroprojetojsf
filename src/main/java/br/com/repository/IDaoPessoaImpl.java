@@ -39,6 +39,7 @@ public class IDaoPessoaImpl implements IDaoPessoa, Serializable {
 		return pessoa;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<SelectItem> listaEstados() {
 

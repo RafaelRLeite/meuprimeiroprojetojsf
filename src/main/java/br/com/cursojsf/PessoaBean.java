@@ -94,7 +94,8 @@ public class PessoaBean implements Serializable {
 				ImageIO.write(resizedImagem, extensao, baos);
 
 				/* o cabeçalho para imprimir imagem na tela é assim: data:image/pnj;base64, */
-				String miniImagem = "data:" + arquivoFoto.getContentType() + ";base64," + DatatypeConverter.printBase64Binary(baos.toByteArray());
+				String miniImagem = "data:" + arquivoFoto.getContentType() + ";base64,"
+						+ DatatypeConverter.printBase64Binary(baos.toByteArray());
 
 				/* Processar imagem */
 
@@ -105,11 +106,11 @@ public class PessoaBean implements Serializable {
 
 		pessoa = daoGeneric.Merge(pessoa);
 		carregarPessoas();
-		mostrarMsg("Cadastrado com sucesso");
+		mostraMsg("Cadastrado com sucesso");
 		return "";
 	}
 
-	private void mostrarMsg(String msg) {
+	private void mostraMsg(String msg) {
 		FacesContext context = FacesContext.getCurrentInstance(); // FacesContext é o ambiente em que roda o JSF
 		FacesMessage message = new FacesMessage(msg);
 		context.addMessage(null, message);
@@ -117,7 +118,7 @@ public class PessoaBean implements Serializable {
 
 	public String novo() {
 		pessoa = new Pessoa();
-		mostrarMsg("Cadastre novo usuário");
+		mostraMsg("Cadastre novo usuário");
 		return "";
 	}
 
@@ -130,16 +131,18 @@ public class PessoaBean implements Serializable {
 		daoGeneric.deletePorId(pessoa);
 		pessoa = new Pessoa();
 		carregarPessoas();
-		mostrarMsg("Cadastrado removido com sucesso");
+		mostraMsg("Cadastrado removido com sucesso");
 		return "";
 	}
 
+	@SuppressWarnings("unchecked")
 	public String editar() {
 		if (pessoa.getCidades() != null) {
 			Estados estado = pessoa.getCidades().getEstados();
 			pessoa.setEstados(estado);
 
-			List<Cidades> cidades = entityManager.createQuery("from Cidades where estados.id = " + estado.getId()).getResultList();
+			List<Cidades> cidades = entityManager.createQuery("from Cidades where estados.id = " + estado.getId())
+					.getResultList();
 
 			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 
@@ -243,24 +246,29 @@ public class PessoaBean implements Serializable {
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			mostrarMsg("erro ao consultar cep");
+			mostraMsg("erro ao consultar cep");
 		}
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void carregarCidades(AjaxBehaviorEvent event) {
 
-		// String codigoEstado = (String) event.getComponent().getAttributes().get("submittedValue"); /* Pega somento o ID do objeto Estados */
+		// String codigoEstado = (String)
+		// event.getComponent().getAttributes().get("submittedValue"); /* Pega somento o
+		// ID do objeto Estados */
 
 		Estados estado = (Estados) ((SelectOneMenu) event.getSource()).getValue();
 
 		// if (codigoEstado != null) {
-		// Estados estado = JPAUtil.getEntityManager().find(Estados.class, Long.parseLong(codigoEstado));
+		// Estados estado = JPAUtil.getEntityManager().find(Estados.class,
+		// Long.parseLong(codigoEstado));
 
 		if (estado != null) {
 			pessoa.setEstados(estado);
 
-			List<Cidades> cidades = entityManager.createQuery("from Cidades where estados.id = " + estado.getId()).getResultList();
+			List<Cidades> cidades = entityManager.createQuery("from Cidades where estados.id = " + estado.getId())
+					.getResultList();
 
 			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 
@@ -304,7 +312,8 @@ public class PessoaBean implements Serializable {
 
 		Pessoa pessoa = daoGeneric.consultar(Pessoa.class, fileDownLoadId);
 
-		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext()
+				.getResponse();
 
 		response.addHeader("Content-Disposition", " attachment; filename=download." + pessoa.getExtensao());
 		response.setContentType("application/octet-stream");
@@ -319,7 +328,10 @@ public class PessoaBean implements Serializable {
 		/* Criar a rotina de gravação do log */
 	}
 
-	/* Metodo que printa no console a mudança do valor antigo para o novo do componente inputText Nome na tela */
+	/*
+	 * Metodo que printa no console a mudança do valor antigo para o novo do
+	 * componente inputText Nome na tela
+	 */
 	public void mudancaDeValor(ValueChangeEvent evento) {
 		System.out.println("Valor antigo: " + evento.getOldValue() + ", Valor novo: " + evento.getNewValue());
 	}
