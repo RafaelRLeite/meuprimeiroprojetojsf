@@ -17,7 +17,7 @@
 
 	<ui:include src="/menu.xhtml" />
 
-	<b:form id="formPessoas"
+	<b:form id="formRelPessoas"
 		style="margin-top:2%; margin-left:2%; margin-right:2%">
 
 		<b:messages id="msg" />
@@ -44,7 +44,7 @@
 
 			<b:column>
 				<b:commandButton value="Buscar" look="primary"
-					action="#{RelUsuarioBean.BuscarPessoa}" />
+					action="#{RelUsuarioBean.RelPessoa}" />
 			</b:column>
 
 		</b:panelGrid>
@@ -53,11 +53,11 @@
 
 	<b:form style="margin-top:3%; margin-left:1.5%; margin-right:1.5%">
 
-		<b:dataTable value="#{RelUsuarioBean.pessoas}" var="pessoa"
+		<b:dataTable value="#{RelUsuarioBean.pessoas}" var="p"
 			caption="Lançamentos" pdf="true" excel="true">
 
-			<b:dataTableColumn value="#{pessoa.id}" label="ID" />
-			<b:dataTableColumn value="#{pessoa.nome}" label="Nome" />
+			<b:dataTableColumn value="#{p.id}" label="ID" />
+			<b:dataTableColumn value="#{p.nome}" label="Nome" />
 
 		</b:dataTable>
 	</b:form>

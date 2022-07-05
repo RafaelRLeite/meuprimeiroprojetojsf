@@ -1,6 +1,7 @@
 package br.com.repository;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -59,9 +60,58 @@ public class IDaoPessoaImpl implements IDaoPessoa, Serializable {
 		return selecItems;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Pessoa> relatorioPessoa(String nome, Date dataIni, Date dataFim) {
 
-		return null;
+		List<Pessoa> lista = new ArrayList<Pessoa>();
+
+		StringBuilder sql = new StringBuilder();
+
+		sql.append(" select p from Pessoa p ");
+
+		if (dataIni == null && dataFim == null && nome != null && !nome.isEmpty()) {
+
+			sql.append(" where upper(p.nome) like '%").append(nome.trim().toUpperCase()).append("%'");
+
+		} else if (nome == null || (nome != null && nome.isEmpty()) && dataIni != null && dataFim == null) {
+
+			String dataIniString = new SimpleDateFormat("YYYY-MM-dd").format(dataIni);
+
+			sql.append(" where p.dataNascimento >= '").append(dataIniString).append("'");
+
+		} else if (nome == null || (nome != null && nome.isEmpty()) && dataIni == null && dataFim != null) {
+
+			String dataFimString = new SimpleDateFormat("YYYY-MM-dd").format(dataFim);
+
+			sql.append(" where p.dataNascimento <= '").append(dataFimString).append("'");
+		}
+
+		else if (nome == null || (nome != null && nome.isEmpty()) && dataIni != null && dataFim != null) {
+
+			String dataIniString = new SimpleDateFormat("YYYY-MM-dd").format(dataIni);
+			String dataFimString = new SimpleDateFormat("YYYY-MM-dd").format(dataFim);
+
+			sql.append(" where p.dataNascimento >= '").append(dataIniString).append("'").append(" and p.dataNascimento <= '").append(dataFimString).append("'");
+		}
+
+		else if (nome != null && !nome.isEmpty() && dataIni != null && dataFim != null) {
+
+			String dataIniString = new SimpleDateFormat("YYYY-MM-dd").format(dataIni);
+			String dataFimString = new SimpleDateFormat("YYYY-MM-dd").format(dataFim);
+
+			sql.append(" where p.dataNascimento >= '").append(dataIniString).append("'").append(" and p.dataNascimento <= '").append(dataFimString).append("'").append(" and upper(p.nome) like = '%")
+					.append(nome.trim().toUpperCase()).append("%'");
+		}
+
+		try {
+
+			lista = entityManager.createQuery(sql.toString()).getResultList();
+
+		} catch (NoResultException e) {
+			return null;
+		}
+		return lista;
 	}
+
 }

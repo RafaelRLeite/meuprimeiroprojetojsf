@@ -78,7 +78,6 @@ public class PessoaBean implements Serializable {
 
 				/* Pega o tipo da imagem */
 				int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
-
 				int largura = 200;
 				int altura = 200;
 
@@ -94,8 +93,7 @@ public class PessoaBean implements Serializable {
 				ImageIO.write(resizedImagem, extensao, baos);
 
 				/* o cabeçalho para imprimir imagem na tela é assim: data:image/pnj;base64, */
-				String miniImagem = "data:" + arquivoFoto.getContentType() + ";base64,"
-						+ DatatypeConverter.printBase64Binary(baos.toByteArray());
+				String miniImagem = "data:" + arquivoFoto.getContentType() + ";base64," + DatatypeConverter.printBase64Binary(baos.toByteArray());
 
 				/* Processar imagem */
 
@@ -141,8 +139,7 @@ public class PessoaBean implements Serializable {
 			Estados estado = pessoa.getCidades().getEstados();
 			pessoa.setEstados(estado);
 
-			List<Cidades> cidades = entityManager.createQuery("from Cidades where estados.id = " + estado.getId())
-					.getResultList();
+			List<Cidades> cidades = entityManager.createQuery("from Cidades where estados.id = " + estado.getId()).getResultList();
 
 			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 
@@ -267,8 +264,7 @@ public class PessoaBean implements Serializable {
 		if (estado != null) {
 			pessoa.setEstados(estado);
 
-			List<Cidades> cidades = entityManager.createQuery("from Cidades where estados.id = " + estado.getId())
-					.getResultList();
+			List<Cidades> cidades = entityManager.createQuery("from Cidades where estados.id = " + estado.getId()).getResultList();
 
 			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 
@@ -312,8 +308,7 @@ public class PessoaBean implements Serializable {
 
 		Pessoa pessoa = daoGeneric.consultar(Pessoa.class, fileDownLoadId);
 
-		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext()
-				.getResponse();
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
 
 		response.addHeader("Content-Disposition", " attachment; filename=download." + pessoa.getExtensao());
 		response.setContentType("application/octet-stream");

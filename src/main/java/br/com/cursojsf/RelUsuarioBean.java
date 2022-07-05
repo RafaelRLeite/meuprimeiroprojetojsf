@@ -22,12 +22,6 @@ public class RelUsuarioBean implements Serializable {
 
 	private List<Pessoa> pessoas = new ArrayList<Pessoa>();
 
-	@Inject
-	private IDaoPessoa daoPessoa;
-
-	@Inject
-	private DaoGeneric<Pessoa> daoGeneric;
-
 	@Temporal(TemporalType.DATE)
 	private Date dataIni;
 
@@ -36,9 +30,15 @@ public class RelUsuarioBean implements Serializable {
 
 	private String nome;
 
+	@Inject
+	private IDaoPessoa daoPessoa;
+
+	@Inject
+	private DaoGeneric<Pessoa> daoGeneric;
+
 	public void RelPessoa() {
 
-		if (nome == null && dataIni == null && dataFim == null) {
+		if (dataIni == null && dataFim == null && (nome == null || nome.isEmpty())) {
 			pessoas = daoGeneric.getListEntity(Pessoa.class);
 		} else {
 			pessoas = daoPessoa.relatorioPessoa(nome, dataIni, dataFim);
