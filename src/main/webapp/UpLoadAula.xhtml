@@ -17,23 +17,29 @@
 
 <h:body>
 
+	<h:form >
+
+		<ui:include src="/menu.xhtml" />
+
+	</h:form>
+
 	<h:form enctype="multipart/form-data">
 
-		<h:panelGrid columns="3">
+		<b:messages />
+
+		<h:panelGrid columns="2">
 
 			<h:outputLabel value="Descrição" />
 			<h:inputText id="descricao" required="true"
 				requiredMessage="Informe a descrição"
-				value="#{UpLoadArquivoBean.arquivoUpLoadAula.descricao}" />
-			<b:message for="descricao" />
+				value="#{upLoadArquivoBean.arquivoUpLoadAula.descricao}" />
 
 			<h:outputLabel value="Arquivo" />
 			<h:inputFile id="arquivo" required="true"
-				value="#{UpLoadArquivoBean.arquivo}"
+				value="#{upLoadArquivoBean.arquivo}"
 				requiredMessage="Inclua o arquivo" />
-			<b:message for="arquivo" />
 
-			<h:commandButton action="#{UpLoadArquivoBean.UpLoad}"
+			<h:commandButton action="#{upLoadArquivoBean.UpLoad}"
 				value="Upload enviar">
 				<f:ajax execute="@form" render="@all" />
 			</h:commandButton>

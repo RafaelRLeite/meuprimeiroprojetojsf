@@ -34,7 +34,7 @@ public class Pessoa implements Serializable {
 
 	/* Não é obrigatório incluir mensagem, @Size define a quantidade de caracteres */
 	@NotEmpty
-	@Size(min = 5, max = 50, message = "O nome deve ter entre 10 e 50 letras")
+	@Size(min = 2, max = 50, message = "O nome deve ter entre 5 e 50 letras")
 	private String nome;
 
 	/* Anotações para validação, NotEmpty não pode ser vazio o output e NotNull não pode ser nulo mas pode ser vazio */

@@ -7,35 +7,58 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Scanner;
 
-import javax.faces.view.ViewScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
 import javax.servlet.http.Part;
 
+import br.com.dao.DaoGeneric;
 import br.com.entidades.ArquivoUpLoadAula;
+import br.com.entidades.Pessoa;
 import br.com.repository.IDaoUpLoadArquivoAulaInterface;
 
-@Named(value = "UpLoadArquivoBean")
-@ViewScoped
+@Named(value = "upLoadArquivoBean")
+@javax.faces.view.ViewScoped
 public class UpLoadArquivoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private ArquivoUpLoadAula arquivoUpLoadAula = new ArquivoUpLoadAula();
+
 	@Inject
-	private EntityManager entityManager;
+	private DaoGeneric<Pessoa> daoGeneric;
 
 	@Inject
 	private IDaoUpLoadArquivoAulaInterface daoUpLoadArquivoAula;
-
-	@Inject
-	private ArquivoUpLoadAula arquivoUpLoadAula;
 
 	private Part arquivo;
 
 	public void UpLoad() throws IOException {
 
-		System.err.println(arquivo.getContentType());
+		/* LENDO ARQUIVOS E ATRIBUINDO A UM ENTITY */
+
+		Scanner scanner = new Scanner(arquivo.getInputStream(), "UTF-8");
+		scanner.useDelimiter(",");
+
+		while (scanner.hasNext()) {
+			String linha = scanner.nextLine();
+
+			if (linha != null && !linha.trim().isEmpty()) {
+				linha = linha.replaceAll("\"", "");
+				String[] dados = linha.split("\\;");
+
+				Pessoa pessoa = new Pessoa();
+
+				pessoa.setNome(dados[0]);
+				pessoa.setSobrenome(dados[1]);
+				pessoa.setCPF(dados[2]);
+				pessoa.setTituloEleitoral(dados[3]);
+				pessoa = daoGeneric.Merge(pessoa);
+			}
+		}
+
+		/* SALVANDO ARQUIVO COMPLETO NO BANCO DE DADOS */
 
 		byte[] arquivoByte = getByte(arquivo.getInputStream());
 
@@ -43,11 +66,9 @@ public class UpLoadArquivoBean implements Serializable {
 
 		daoUpLoadArquivoAula.salvar(arquivoUpLoadAula);
 
-		Scanner conteudo = new Scanner(arquivo.getInputStream());
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage("Upload realizado"));
 
-		while (conteudo.hasNext()) {
-			System.out.println(conteudo.next());
-		}
 	}
 
 	private byte[] getByte(InputStream is) throws IOException {
@@ -70,6 +91,14 @@ public class UpLoadArquivoBean implements Serializable {
 			buf = bos.toByteArray();
 		}
 		return buf;
+	}
+
+	public IDaoUpLoadArquivoAulaInterface getDaoUpLoadArquivoAula() {
+		return daoUpLoadArquivoAula;
+	}
+
+	public void setDaoUpLoadArquivoAula(IDaoUpLoadArquivoAulaInterface daoUpLoadArquivoAula) {
+		this.daoUpLoadArquivoAula = daoUpLoadArquivoAula;
 	}
 
 	public ArquivoUpLoadAula getArquivoUpLoadAula() {

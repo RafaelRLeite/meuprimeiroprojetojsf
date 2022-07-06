@@ -231,20 +231,20 @@
 
 				<!-- actionListener é chamado antes do action e não faz redirecionamento -->
 				<h:commandButton title="Salvar" value="Salvar"
-					actionListener="#{pessoaBean.registraLog()}"
-					action="#{pessoaBean.salvar()}" image="/resources/img/Salvar.png" />
+					actionListener="#{pessoaBean.registraLog}"
+					action="#{pessoaBean.salvar}" image="/resources/img/Salvar.png" />
 
 				<h:commandButton title="Novo" value="Novo" id="botaoNovo"
-					action="#{pessoaBean.novo()}" style="margin-left:0.5cm"
+					action="#{pessoaBean.novo}" style="margin-left:0.5cm"
 					image="/resources/img/NovoUsuario.png">
 					<f:ajax execute="botaoNovo" render="@form" />
 				</h:commandButton>
 				<h:commandButton title="Deletar" value="Delete"
-					action="#{pessoaBean.remove()}" style="margin-left:0.5cm"
+					action="#{pessoaBean.remove}" style="margin-left:0.5cm"
 					image="/resources/img/Delete.png"
 					rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" />
 				<h:commandButton title="Limpar" id="botaoLimpar" value="Limpar"
-					action="#{pessoaBean.limpar()}" style="margin-left:0.5cm"
+					action="#{pessoaBean.limpar}" style="margin-left:0.5cm"
 					image="/resources/img/Limpar.png">
 					<f:ajax execute="botaoLimpar" render="@form" />
 				</h:commandButton>
@@ -274,7 +274,7 @@
 
 			<h:column>
 				<f:facet name="header">Editar</f:facet>
-				<h:commandLink action="#{pessoaBean.editar()}" immediate="true">
+				<h:commandLink action="#{pessoaBean.editar}" immediate="true">
 					<!-- // immediate="true" inicia sem fazer validação -->
 					<h:graphicImage value="/resources/img/Editar.png" />
 					<f:setPropertyActionListener target="#{pessoaBean.pessoa}"
