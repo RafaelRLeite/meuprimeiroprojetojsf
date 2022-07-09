@@ -100,15 +100,18 @@
 				</b:column>
 
 				<b:column>
-					<h:outputLabel value="Frameworks:" />
-					<h:selectManyMenu id="campoFramework" style="height:100px"
-						value="#{pessoaBean.pessoa.frameworks}">
-						<f:selectItem itemValue="Hibernate" />
-						<f:selectItem itemValue="Spring MVC" />
-						<f:selectItem itemValue="PrimeFaces" />
-						<f:selectItem itemValue="JPA" />
-						<f:selectItem itemValue="JSF" />
-					</h:selectManyMenu>
+					<b:panelGrid columns="2" style="width:30%">
+						<h:outputLabel value="Frameworks:" style="margin-top:45%" />
+						<h:selectManyMenu id="campoFramework"
+							style="height:100px;margin-left:5%"
+							value="#{pessoaBean.pessoa.frameworks}">
+							<f:selectItem itemValue="Hibernate" />
+							<f:selectItem itemValue="Spring MVC" />
+							<f:selectItem itemValue="PrimeFaces" />
+							<f:selectItem itemValue="JPA" />
+							<f:selectItem itemValue="JSF" />
+						</h:selectManyMenu>
+					</b:panelGrid>
 				</b:column>
 
 				<b:column>
@@ -136,30 +139,32 @@
 						<f:selectItem itemValue="RECEPCIONISTA" itemLabel="	Recepcionista" />
 					</b:selectOneMenu>
 				</b:column>
+				
+				<b:panelGrid columns="2">
+					<b:column>
+						<h:outputLabel value="Programador" />
+						<h:selectOneRadio id="compoNivelProgramador"
+							value="#{pessoaBean.pessoa.nivelProgramador}"
+							layout="pageDirection">
+							<f:selectItem itemValue="J" itemLabel=" Junior" />
+							<f:selectItem itemValue="P" itemLabel=" Pleno" />
+							<f:selectItem itemValue="S" itemLabel=" Senio" />
+							<f:selectItem itemValue="E" itemLabel=" Especialista" />
+						</h:selectOneRadio>
+					</b:column>
 
-				<b:column>
-					<h:outputLabel value="Programador" />
-					<h:selectOneRadio id="compoNivelProgramador"
-						value="#{pessoaBean.pessoa.nivelProgramador}"
-						layout="pageDirection">
-						<f:selectItem itemValue="J" itemLabel=" Junior" />
-						<f:selectItem itemValue="P" itemLabel=" Pleno" />
-						<f:selectItem itemValue="S" itemLabel=" Senio" />
-						<f:selectItem itemValue="E" itemLabel=" Especialista" />
-					</h:selectOneRadio>
-				</b:column>
-
-				<b:column>
-					<h:outputLabel value="Linguagens: " />
-					<h:selectManyCheckbox value="#{pessoaBean.pessoa.linguagens}">
-						<f:selectItem itemValue="1" itemLabel="Java" />
-						<f:selectItem itemValue="2" itemLabel="PHP" />
-						<f:selectItem itemValue="3" itemLabel="Python" />
-						<f:selectItem itemValue="4" itemLabel="C#" />
-						<f:selectItem itemValue="5" itemLabel="Cobol" />
-					</h:selectManyCheckbox>
-				</b:column>
-
+					<b:column>
+						<h:outputLabel value="Linguagens: " />
+						<h:selectManyCheckbox value="#{pessoaBean.pessoa.linguagens}" style="margin-top:5%">
+							<f:selectItem itemValue="1" itemLabel="Java" />
+							<f:selectItem itemValue="2" itemLabel="PHP" />
+							<f:selectItem itemValue="3" itemLabel="Python" />
+							<f:selectItem itemValue="4" itemLabel="C#" />
+							<f:selectItem itemValue="5" itemLabel="Cobol" />
+						</h:selectManyCheckbox>
+					</b:column>
+				</b:panelGrid>
+				
 			</b:panel>
 
 			<b:panel>

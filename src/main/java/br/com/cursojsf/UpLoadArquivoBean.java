@@ -5,12 +5,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import br.com.dao.DaoGeneric;
@@ -27,14 +32,16 @@ public class UpLoadArquivoBean implements Serializable {
 	private ArquivoUpLoadAula arquivoUpLoadAula = new ArquivoUpLoadAula();
 
 	@Inject
-	private DaoGeneric<Pessoa> daoGeneric;
+	private DaoGeneric<Object> daoGeneric;
 
 	@Inject
 	private IDaoUpLoadArquivoAulaInterface daoUpLoadArquivoAula;
 
 	private Part arquivo;
 
-	public void UpLoad() throws IOException {
+	private List<ArquivoUpLoadAula> lista = new ArrayList<ArquivoUpLoadAula>();
+
+	public void upLoad() throws IOException {
 
 		/* LENDO ARQUIVOS E ATRIBUINDO A UM ENTITY */
 
@@ -54,7 +61,7 @@ public class UpLoadArquivoBean implements Serializable {
 				pessoa.setSobrenome(dados[1]);
 				pessoa.setCPF(dados[2]);
 				pessoa.setTituloEleitoral(dados[3]);
-				pessoa = daoGeneric.Merge(pessoa);
+				pessoa = (Pessoa) daoGeneric.Merge(pessoa);
 			}
 		}
 
@@ -68,6 +75,31 @@ public class UpLoadArquivoBean implements Serializable {
 
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("Upload realizado"));
+
+		carregarList();
+
+	}
+
+	public void downLoad() throws IOException {
+		Map<String, String> param = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String fileDownloadId = param.get("fileDownloadId");
+		ArquivoUpLoadAula arquivoUpLoadAula = daoUpLoadArquivoAula.buscar(fileDownloadId);
+
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext()
+				.getResponse();
+
+		response.addHeader("Content-Disposition",
+				"attachment; filename=\"" + arquivoUpLoadAula.getDescricao() + ".csv\"");
+		response.setContentType("application/pctet-stream");
+		response.setContentLength(arquivoUpLoadAula.getArquivo().length);
+		response.getOutputStream().write(arquivoUpLoadAula.getArquivo());
+		response.getOutputStream().flush();
+		FacesContext.getCurrentInstance().responseComplete();
+	}
+
+	@PostConstruct
+	private void carregarList() {
+		lista = daoUpLoadArquivoAula.lista();
 
 	}
 
@@ -91,6 +123,14 @@ public class UpLoadArquivoBean implements Serializable {
 			buf = bos.toByteArray();
 		}
 		return buf;
+	}
+
+	public List<ArquivoUpLoadAula> getLista() {
+		return lista;
+	}
+
+	public void setLista(List<ArquivoUpLoadAula> lista) {
+		this.lista = lista;
 	}
 
 	public IDaoUpLoadArquivoAulaInterface getDaoUpLoadArquivoAula() {

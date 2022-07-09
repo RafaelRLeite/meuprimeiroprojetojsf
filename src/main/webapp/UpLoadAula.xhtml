@@ -12,16 +12,12 @@
 <h:head>
 
 	<title>Upload de arquivos</title>
-
+	<link href="resources/estilo.css" rel="stylesheet"></link>
 </h:head>
 
 <h:body>
 
-	<h:form >
-
-		<ui:include src="/menu.xhtml" />
-
-	</h:form>
+	<ui:include src="/menu.xhtml" />
 
 	<h:form enctype="multipart/form-data">
 
@@ -30,7 +26,7 @@
 		<h:panelGrid columns="2">
 
 			<h:outputLabel value="Descrição" />
-			<h:inputText id="descricao" required="true"
+			<b:inputText id="descricao" required="true"
 				requiredMessage="Informe a descrição"
 				value="#{upLoadArquivoBean.arquivoUpLoadAula.descricao}" />
 
@@ -39,12 +35,25 @@
 				value="#{upLoadArquivoBean.arquivo}"
 				requiredMessage="Inclua o arquivo" />
 
-			<h:commandButton action="#{upLoadArquivoBean.UpLoad}"
-				value="Upload enviar">
-				<f:ajax execute="@form" render="@all" />
-			</h:commandButton>
+			<b:commandButton action="#{upLoadArquivoBean.UpLoad}"
+				value="Upload enviar" style="margin-top:15%">
+				<f:ajax execute="@form" render="@form" />
+			</b:commandButton>
 
 		</h:panelGrid>
+
+		<b:dataTable value="#{upLoadArquivoBean.lista}" var="lista">
+
+			<b:dataTableColumn value="#{lista.id}" label="ID" />
+			<b:dataTableColumn value="#{lista.descricao}" label="Descrição" />
+			<b:dataTableColumn label="Download">
+				<b:commandLink actionListener="#{upLoadArquivoBean.downLoad}"
+					value="Descrição" immediate="true">
+					<f:param name="fileDownloadId" value="#{lista.id}" />
+				</b:commandLink>
+			</b:dataTableColumn>
+
+		</b:dataTable>
 
 	</h:form>
 
