@@ -35,7 +35,7 @@
 				value="#{upLoadArquivoBean.arquivo}"
 				requiredMessage="Inclua o arquivo" />
 
-			<b:commandButton action="#{upLoadArquivoBean.UpLoad}"
+			<b:commandButton actionListener="#{upLoadArquivoBean.upLoad()}"
 				value="Upload enviar" style="margin-top:15%">
 				<f:ajax execute="@form" render="@form" />
 			</b:commandButton>
@@ -47,7 +47,7 @@
 			<b:dataTableColumn value="#{lista.id}" label="ID" />
 			<b:dataTableColumn value="#{lista.descricao}" label="Descrição" />
 			<b:dataTableColumn label="Download">
-				<b:commandLink actionListener="#{upLoadArquivoBean.downLoad}"
+				<b:commandLink actionListener="#{upLoadArquivoBean.downLoad()}"
 					value="Descrição" immediate="true">
 					<f:param name="fileDownloadId" value="#{lista.id}" />
 				</b:commandLink>

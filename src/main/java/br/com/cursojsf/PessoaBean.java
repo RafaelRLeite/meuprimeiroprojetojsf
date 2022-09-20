@@ -239,7 +239,6 @@ public class PessoaBean implements Serializable {
 			pessoa.setLocalidade(gsonAux.getLocalidade());
 			pessoa.setUf(gsonAux.getUf());
 
-			// System.out.println(gsonAux);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();

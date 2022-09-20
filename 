@@ -1,0 +1,159 @@
+[33mcommit 0cdb3c04dc68dfed6c2cda47c7f349c00d67b10e[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Dell <Dell@192.168.100.102>
+Date:   Sat Jul 9 03:20:00 2022 -0300
+
+    Implementando Upload e Download de aquivos
+
+[33mcommit 0e35cec2f945d96611302423be21d634d7634dbe[m
+Author: Dell <Dell@192.168.100.102>
+Date:   Wed Jul 6 02:02:32 2022 -0300
+
+    Fazendo upload e lendo arquivos CSV no JSF
+
+[33mcommit fa42b630139aa194913108be7b849acdf65575ff[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Tue Jul 5 14:09:17 2022 -0300
+
+    Atualização
+
+[33mcommit 2cb3d79270f29710b4aa53562ea555000ca4f94b[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Mon Jul 4 14:15:25 2022 -0300
+
+    Usando CSS, Gerando relatório de Lançamentos e Pessoas, aplicando
+    mascaras
+
+[33mcommit e49740b48e8b0c1bdb6df4baec1f304f77345124[m
+Author: Dell <Dell@192.168.100.102>
+Date:   Mon Jul 4 00:53:08 2022 -0300
+
+    Criando barra de navegação, incluindo relatório PDF e EXCEL com filtros
+    e limitando carregamento em tela
+
+[33mcommit ec22f99ff8de5629133b7709891c20cda1874aa2[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Fri Jul 1 14:06:24 2022 -0300
+
+    Utilizando BootFaces no cadastro de lancamentos e adicionando DatePicker
+
+[33mcommit c425e88dd246806fb25b9b79f2a5bbc8a6f889a8[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Wed Jun 29 14:15:09 2022 -0300
+
+    Resolvendo problemas com CDI
+
+[33mcommit 39c83a046200bd261c544fe2f3a513eeb9d246c6[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Tue Jun 28 14:21:22 2022 -0300
+
+    Implementação de CDI
+
+[33mcommit afe501680c604fb30348e36527e8f45c4e7f9516[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Mon Jun 27 14:10:24 2022 -0300
+
+    Implementando Validator
+
+[33mcommit 0e3e8a97681d96afe69fc036a3a9df5fb99bd86b[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Fri Jun 24 13:57:32 2022 -0300
+
+    Inclundo upload e download de imagens no form e no datatable
+
+[33mcommit 3bda2d33300e9a96661e34f4345b41a42af96571[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Thu Jun 23 13:54:59 2022 -0300
+
+    Finalizando os combos dependentes e incluindo upload de imagens:
+    recebendo e gravando no banco de dados
+
+[33mcommit 56d61eb39b0d363a563049655d99ac10abd5be40[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Wed Jun 22 14:05:24 2022 -0300
+
+    Realizando o converter dos Objetos Estado e Cidade
+
+[33mcommit d0dfe0fdcf0c6f5efeaa2badbd8dc972078b8888[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Tue Jun 21 14:12:02 2022 -0300
+
+    Implementando Combos Dependentes de Estados e Cidades
+
+[33mcommit d35b2dbc892b969c81ea9a74c2a4ec833f8530f5[m
+Author: Dell <Dell@192.168.100.109>
+Date:   Tue Jun 21 00:09:08 2022 -0300
+
+    Criando Logout, implementando Placeholder no JSF e iniciando combos
+    dependentes
+
+[33mcommit a13cf0dee8d8487ebe211fbde55a5e4f21e3c3f8[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Mon Jun 20 14:03:50 2022 -0300
+
+    Utilizando JSON para consumir Web Service Cep
+
+[33mcommit ee41b41d2a09ebb726d7af9865d6bf3417dc20f5[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Wed Jun 15 13:40:51 2022 -0300
+
+    Incluindo novos componentes, templates e conversão de datas
+
+[33mcommit df9c54d280511f8cc62d6ba9c0ffd13defb9788a[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Tue Jun 14 14:01:40 2022 -0300
+
+    Versão4
+
+[33mcommit 873655453ae804385fa5dbeb794f3d5fed96d6ac[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Tue Jun 14 10:23:05 2022 -0300
+
+    Versão 2.2.1
+
+[33mcommit 802fbe8a98dddb3d0260943016ebfdb39b4d530a[m
+Author: João Pedro <desenvolvedor3@siscontroladoras.com.br>
+Date:   Tue Jun 14 10:22:27 2022 -0300
+
+    Versão2.3
+
+[33mcommit 257252a6dc7e609f4ea66bcf1d61919695a9adc7[m
+Author: Rafael <96965061+RafaelRleite@users.noreply.github.com>
+Date:   Tue Jun 14 00:13:04 2022 -0300
+
+    Update README.md
+
+[33mcommit 61ef5829142c15580e4cf05bbe6a60d4af6e8562[m
+Author: Rafael <96965061+RafaelRleite@users.noreply.github.com>
+Date:   Tue Jun 14 00:01:30 2022 -0300
+
+    Update README.md
+
+[33mcommit 2177a7b45b3a44e21d2a39c7d48426327f4f4cd5[m
+Author: Rafael <96965061+RafaelRleite@users.noreply.github.com>
+Date:   Tue Jun 14 00:00:52 2022 -0300
+
+    Create README.md
+
+[33mcommit 815ff3709b9e95ec6d5424e22bf6d9504b65d7fa[m
+Author: Dell <Dell@Rafael-PC>
+Date:   Mon Jun 13 23:56:01 2022 -0300
+
+    Criação da pagina de lançamentos vinculado pelo ID do usuário
+
+[33mcommit e02f42f00fbbff9d43e8edd23a51043a6f1271fb[m
+Author: Dell <Dell@Rafael-PC>
+Date:   Fri Jun 10 23:31:25 2022 -0300
+
+    Versão 2.1
+
+[33mcommit 89e87fb494acdd1004dd065f6fe9c741895e078e[m
+Author: Dell <Dell@Rafael-PC>
+Date:   Fri Jun 10 22:26:41 2022 -0300
+
+    Versão 2
+
+[33mcommit e3cb3ae3cda0c7ef4b6d9c70c016889d353d86ee[m
+Author: Dell <Dell@Rafael-PC>
+Date:   Fri Jun 10 02:48:44 2022 -0300
+
+    Criação do Projeto
